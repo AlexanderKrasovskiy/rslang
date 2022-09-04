@@ -303,7 +303,7 @@ export class PhraseGameView {
     const winBlock = createElement('div', 'phrase_over card');
     const showTotalRes = createElement('div', 'sprint_result');
     const showExperience = createElement('div', 'sprint_show-resultexperience');
-    const gameOver = <HTMLAudioElement>new Audio('../../assets/audio/over.mp3');
+    const gameOver = <HTMLAudioElement>new Audio('./assets/audio/over.mp3');
     const learnWords = createElement('ul', 'sprint_list-words');
     const unlearnWords = createElement('ul', 'sprint_list-words');
     const headerBlock = createElement('div', 'sprint_header-result');
@@ -471,7 +471,7 @@ export class PhraseGameView {
   };
 
   private createSounds(sound: boolean): void {
-    const moveCard: HTMLAudioElement = new Audio('../../assets/audio/card-on-place-1.mp3');
+    const moveCard: HTMLAudioElement = new Audio('./assets/audio/card-on-place-1.mp3');
     if (!sound) {
       moveCard.pause();
     } else {

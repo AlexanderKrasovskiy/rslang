@@ -415,7 +415,7 @@ export class PhraseGameView {
           (<Optional>item1.optional).learnDate = Date.now();
         }
 
-        if (item1.difficulty !== 'difficult' && ((<Optional>item1.optional).games.phrase.wins + 1) % 3 === 0) {
+        if (item1.difficulty === 'normal' && ((<Optional>item1.optional).games.phrase.wins + 1) % 3 === 0) {
           item1.difficulty = 'easy';
           (<Optional>item1.optional).learned = 'yes';
           (<Optional>item1.optional).learnDate = Date.now();

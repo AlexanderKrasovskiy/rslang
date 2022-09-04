@@ -728,8 +728,6 @@ export class SprintGameView {
     this.soundImg.classList.remove('sprint_not-sound');
     this.bestResult = [0];
     this.countBestRes = 0;
-    this.bestResult = [0];
-    this.countBestRes = 0;
     this.timeleft = 0;
     this.points = 10;
     this.pointsTotal = 0;

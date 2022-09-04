@@ -173,6 +173,7 @@ class StatsModel {
   }
 
   public async postBestSeries(num: number) {
+    if (!num) return;
     const userJSON = localStorage.getItem('user');
     if (!userJSON) return;
 

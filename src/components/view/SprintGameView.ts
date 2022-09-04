@@ -536,7 +536,7 @@ export class SprintGameView {
     (<UserWordPlus>userWord).optional.games.audio.total += 1;
 
     if (
-      (<UserWordPlus>userWord).difficulty !== 'difficult' &&
+      (<UserWordPlus>userWord).difficulty === 'normal' &&
       (<UserWordPlus>userWord).optional.games.audio.wins % 3 === 0
     ) {
       (<UserWordPlus>userWord).difficulty = 'easy';

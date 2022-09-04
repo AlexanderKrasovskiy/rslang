@@ -532,19 +532,19 @@ export class SprintGameView {
   private async correctUserWord(word: Word | UserWordPlus, user: LoginData) {
     const userWord = word;
     await statsModel.postCorrect(userWord);
-    (<UserWordPlus>userWord).optional.games.audio.wins += 1;
-    (<UserWordPlus>userWord).optional.games.audio.total += 1;
+    (<UserWordPlus>userWord).optional.games.sprint.wins += 1;
+    (<UserWordPlus>userWord).optional.games.sprint.total += 1;
 
     if (
       (<UserWordPlus>userWord).difficulty === 'normal' &&
-      (<UserWordPlus>userWord).optional.games.audio.wins % 3 === 0
+      (<UserWordPlus>userWord).optional.games.sprint.wins % 3 === 0
     ) {
       (<UserWordPlus>userWord).difficulty = 'easy';
       (<UserWordPlus>userWord).optional.learned = 'yes';
       (<UserWordPlus>userWord).optional.learnDate = Date.now();
     } else if (
       (<UserWordPlus>userWord).difficulty === 'difficult' &&
-      (<UserWordPlus>userWord).optional.games.audio.wins % 5 === 0
+      (<UserWordPlus>userWord).optional.games.sprint.wins % 5 === 0
     ) {
       (<UserWordPlus>userWord).difficulty = 'easy';
       (<UserWordPlus>userWord).optional.learned = 'yes';
@@ -560,7 +560,7 @@ export class SprintGameView {
   private async incorrectUserWord(word: Word | UserWordPlus, user: LoginData) {
     const userWord = word;
     await statsModel.postWrong(userWord);
-    (<UserWordPlus>userWord).optional.games.audio.total += 1;
+    (<UserWordPlus>userWord).optional.games.sprint.total += 1;
     if ((<UserWordPlus>userWord).optional.learned === 'yes') {
       (<UserWordPlus>userWord).difficulty = 'normal';
       (<UserWordPlus>userWord).optional.learned = 'no';

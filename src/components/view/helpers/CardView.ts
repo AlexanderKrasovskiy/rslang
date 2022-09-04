@@ -34,8 +34,8 @@ export class Card {
     this.difficult = createElement('div', 'difficult tooltipped');
     if (userJSON && level !== 6) {
       if (this.data.difficulty && this.data.difficulty === 'difficult')
-        this.difficult.style.backgroundImage = `url(../assets/svg/difficult-colored.svg)`;
-      else this.difficult.style.backgroundImage = `url(../assets/svg/difficult.svg)`;
+        this.difficult.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
+      else this.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
       this.difficult.setAttribute('data-position', 'left');
       this.difficult.setAttribute('data-tooltip', 'Сложно!');
       wordImgWrap.appendChild(this.difficult);
@@ -44,8 +44,8 @@ export class Card {
     this.learn = createElement('div', 'learn tooltipped');
     if (userJSON && level !== 6) {
       if (this.data.optional && this.data.optional.learned === 'yes')
-        this.learn.style.backgroundImage = `url(../assets/svg/learn-colored.svg)`;
-      else this.learn.style.backgroundImage = `url(../assets/svg/learn.svg)`;
+        this.learn.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
+      else this.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
       this.learn.setAttribute('data-position', 'right');
       this.learn.setAttribute('data-tooltip', 'Изучено :)');
       wordImgWrap.appendChild(this.learn);
@@ -53,7 +53,7 @@ export class Card {
 
     this.diffDifficultLevel = createElement('div', 'diff-difficult-level tooltipped');
     if (userJSON && level === 6) {
-      this.diffDifficultLevel.style.backgroundImage = `url(../assets/svg/difficult-colored.svg)`;
+      this.diffDifficultLevel.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
       this.diffDifficultLevel.setAttribute('data-position', 'right');
       this.diffDifficultLevel.setAttribute('data-tooltip', 'Не сложно!');
       wordImgWrap.appendChild(this.diffDifficultLevel);
@@ -61,7 +61,7 @@ export class Card {
 
     this.learnDifficultLevel = createElement('div', 'learn-difficult-level tooltipped');
     if (userJSON && level === 6) {
-      this.learnDifficultLevel.style.backgroundImage = `url(../assets/svg/learn.svg)`;
+      this.learnDifficultLevel.style.backgroundImage = `url(./assets/svg/learn.svg)`;
       this.learnDifficultLevel.setAttribute('data-position', 'right');
       this.learnDifficultLevel.setAttribute('data-tooltip', 'Изучено :)');
       wordImgWrap.appendChild(this.learnDifficultLevel);

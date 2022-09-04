@@ -144,7 +144,11 @@ export class BookView {
     level5.onclick = () => this.switchLevel(5);
 
     if (user) {
-      const level6 = createElement('div', 'level-btn z-depth-2 waves-effect waves-light white-border', 'Сложные слова');
+      const level6 = createElement(
+        'div',
+        'level-btn level-btn-difficult z-depth-2 waves-effect waves-light white-border',
+        'Сложные слова',
+      );
       levels.appendChild(level6);
       level6.onclick = () => this.switchLevel(6);
     }
@@ -200,7 +204,7 @@ export class BookView {
 
     picture1.src = `assets/images/${color}-1.jpg`;
     picture3.src = `assets/images/${color}-3.jpg`;
-    bookWrap.style.backgroundImage = `url(../assets/images/${color}-2.jpg)`;
+    bookWrap.style.backgroundImage = `url(./assets/images/${color}-2.jpg)`;
   }
 
   renderPagination(pagination: HTMLElement, position: string) {
@@ -326,8 +330,8 @@ export class BookView {
             optional: res[i].optional,
           });
 
-          card.difficult.style.backgroundImage = `url(../assets/svg/difficult-colored.svg)`;
-          card.learn.style.backgroundImage = `url(../assets/svg/learn.svg)`;
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
 
           this.learnAndDifficult += 1;
           if (this.learnAndDifficult >= WORD_ON_PAGE) this.changePageStyle('learned');
@@ -338,8 +342,8 @@ export class BookView {
 
           await this.makeWordNormal(res[i], <LoginData>user);
 
-          card.difficult.style.backgroundImage = `url(../assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(../assets/svg/learn.svg)`;
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
         } else if (res[i].difficulty && res[i].difficulty !== 'difficult') {
           if (res[i].difficulty === 'normal') {
             this.learnAndDifficult += 1;
@@ -354,8 +358,8 @@ export class BookView {
             optional: res[i].optional,
           });
 
-          card.difficult.style.backgroundImage = `url(../assets/svg/difficult-colored.svg)`;
-          card.learn.style.backgroundImage = `url(../assets/svg/learn.svg)`;
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
         }
       };
 
@@ -378,8 +382,8 @@ export class BookView {
             optional: res[i].optional,
           });
 
-          card.difficult.style.backgroundImage = `url(../assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(../assets/svg/learn-colored.svg)`;
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
 
           this.learnAndDifficult += 1;
           if (this.learnAndDifficult >= WORD_ON_PAGE) this.changePageStyle('learned');
@@ -390,8 +394,8 @@ export class BookView {
 
           await this.makeWordNormal(res[i], <LoginData>user);
 
-          card.difficult.style.backgroundImage = `url(../assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(../assets/svg/learn.svg)`;
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
         } else if (res[i].optional && res[i].optional?.learned === 'no') {
           if (res[i].difficulty === 'normal') {
             this.learnAndDifficult += 1;
@@ -406,15 +410,15 @@ export class BookView {
             optional: res[i].optional,
           });
 
-          card.difficult.style.backgroundImage = `url(../assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(../assets/svg/learn-colored.svg)`;
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
         }
       };
 
       card.onLearnDifficultLevel = async () => {
         (<Optional>res[i].optional).learned = 'yes';
         (<Optional>res[i].optional).learnDate = Date.now();
-        card.learnDifficultLevel.style.backgroundImage = `url(../assets/svg/learn-colored.svg)`;
+        card.learnDifficultLevel.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
         await updateUserWord((<LoginData>user).id, res[i].id, (<LoginData>user).token, {
           difficulty: 'easy',
           optional: res[i].optional,
@@ -425,7 +429,7 @@ export class BookView {
       };
 
       card.onDiffDifficultLevel = async () => {
-        card.diffDifficultLevel.style.backgroundImage = `url(../assets/svg/difficult.svg)`;
+        card.diffDifficultLevel.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
         await updateUserWord((<LoginData>user).id, res[i].id, (<LoginData>user).token, {
           difficulty: 'normal',
           optional: res[i].optional,

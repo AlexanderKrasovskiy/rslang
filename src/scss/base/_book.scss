@@ -69,7 +69,7 @@
     width: 90%;
     height: 2.5rem;
     min-width: fit-content;
-    max-width: 7rem;
+    max-width: 8rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,6 +79,10 @@
     &:hover {
         box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14), 0 2px 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px -2px rgba(0, 0, 0, 0.2);
     }
+}
+
+.level-btn-difficult {
+    font-size: 0.9rem;
 }
 
 .games-btn {

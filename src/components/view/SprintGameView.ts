@@ -291,10 +291,10 @@ export class SprintGameView {
       this.timeleft -= 1;
     }, 1000);
 
-    this.handleKeypress = async (el: KeyboardEvent) => {
+    this.handleKeypress = (el: KeyboardEvent) => {
       if (index < mixData.length) {
         if (el.code === 'ArrowRight') {
-          await this.rightChoice(
+          this.rightChoice(
             index,
             mixData,
             data,
@@ -311,7 +311,7 @@ export class SprintGameView {
         }
 
         if (el.code === 'ArrowLeft') {
-          await this.wrongChoice(
+          this.wrongChoice(
             index,
             mixData,
             data,
@@ -334,8 +334,8 @@ export class SprintGameView {
 
     window.addEventListener('keyup', this.handleKeypress);
 
-    btnRight.onclick = async () => {
-      await this.rightChoice(
+    btnRight.onclick = () => {
+      this.rightChoice(
         index,
         mixData,
         data,
@@ -352,8 +352,8 @@ export class SprintGameView {
       index += 1;
     };
 
-    btnWrong.onclick = async () => {
-      await this.wrongChoice(
+    btnWrong.onclick = () => {
+      this.wrongChoice(
         index,
         mixData,
         data,
@@ -387,7 +387,7 @@ export class SprintGameView {
     return this.stateGame;
   }
 
-  async rightChoice(
+  rightChoice(
     index: number,
     mixData: MixWordsSprint[],
     data: WordPlusUserWord[],
@@ -408,12 +408,12 @@ export class SprintGameView {
 
     if (index < mixData.length) {
       const userWord = this.findWord(data, mixData[index].en);
-      if (userWord && user) await this.createNewUserWord(userWord, user);
+      if (userWord && user) this.createNewUserWord(userWord, user);
       if (!mixData[index].match) {
         if (userWord && user) {
           this.bestResult.push(this.countBestRes);
           this.countBestRes = 0;
-          await this.incorrectUserWord(userWord, user);
+          this.incorrectUserWord(userWord, user);
         }
         this.createSounds(this.sound, 'false');
         this.createWrongResult(data, mixData[index].en);
@@ -425,7 +425,7 @@ export class SprintGameView {
         if (userWord && user) {
           this.countBestRes += 1;
           this.bestResult.push(this.countBestRes);
-          await this.correctUserWord(userWord, user);
+          this.correctUserWord(userWord, user);
         }
         this.createSounds(this.sound, 'true');
         this.createCorrectResult(data, mixData[index].en);
@@ -445,7 +445,7 @@ export class SprintGameView {
     wordName.appendChild(audioBlock);
   }
 
-  async wrongChoice(
+  wrongChoice(
     index: number,
     mixData: MixWordsSprint[],
     data: WordPlusUserWord[],
@@ -466,12 +466,12 @@ export class SprintGameView {
 
     if (index < mixData.length) {
       const userWord = this.findWord(data, mixData[index].en);
-      if (userWord && user) await this.createNewUserWord(userWord, user);
+      if (userWord && user) this.createNewUserWord(userWord, user);
       if (!mixData[index].match) {
         if (userWord && user) {
           this.countBestRes += 1;
           this.bestResult.push(this.countBestRes);
-          await this.correctUserWord(userWord, user);
+          this.correctUserWord(userWord, user);
         }
         this.createSounds(this.sound, 'true');
         this.createCorrectResult(data, mixData[index].en);
@@ -481,7 +481,7 @@ export class SprintGameView {
         if (userWord && user) {
           this.bestResult.push(this.countBestRes);
           this.countBestRes = 0;
-          await this.incorrectUserWord(userWord, user);
+          this.incorrectUserWord(userWord, user);
         }
         this.createSounds(this.sound, 'false');
         this.createWrongResult(data, mixData[index].en);

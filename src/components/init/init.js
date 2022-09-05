@@ -6,5 +6,6 @@
         $('.dropdown-trigger').dropdown();
         $('.collapsible').collapsible();
         $('.scrollspy').scrollSpy();
+        $('.tooltipped').tooltip();
     }); // end of document ready
 })(jQuery); // end of jQuery name space

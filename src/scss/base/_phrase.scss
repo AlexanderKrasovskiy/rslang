@@ -178,7 +178,7 @@
     bottom: 0;
     background: #ffffff;
     width: 450px;
-    height: fit-content;
+    height: 74vh;
     border-radius: 3px;
     transition: 0.3s;
     &:hover {
@@ -417,4 +417,12 @@
     &:focus {
         box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.3), 0 2px 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px -2px rgba(0, 0, 0, 0.2);
     }
+}
+
+.phrase_list-words {
+    margin-left: 3px;
+    font-size: 16px;
+    font-weight: 500;
+    width: 95%;
+    padding-bottom: 15px;
 }

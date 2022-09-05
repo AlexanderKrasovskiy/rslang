@@ -328,11 +328,11 @@ export class SprintGameView {
         }
         index += 1;
       } else {
-        window.removeEventListener('keydown', this.handleKeypress);
+        window.removeEventListener('keyup', this.handleKeypress);
       }
     };
 
-    window.addEventListener('keydown', this.handleKeypress);
+    window.addEventListener('keyup', this.handleKeypress);
 
     btnRight.onclick = async () => {
       await this.rightChoice(
@@ -586,25 +586,29 @@ export class SprintGameView {
     const unlearnWords = createElement('ul', 'sprint_list-words');
     const headerBlock = createElement('div', 'sprint_header-result');
     const allWords = createElement('ul', 'sprint_all-words');
+    const arrStr1 = this.learnedWords.map((a) => JSON.stringify(a));
+    const learnedWords = [...new Set(arrStr1)].map((e) => JSON.parse(e));
+    const arrStr2 = this.unlearnedWords.map((a) => JSON.stringify(a));
+    const unlearnedWords = [...new Set(arrStr2)].map((e) => JSON.parse(e));
     const headerListLerned = createElement(
       'div',
       'sprint_header-learn',
-      `Угаданные слова - ${this.learnedWords.length}`,
+      `Угаданные слова - ${learnedWords.length}`,
     );
     const headerListUnlerned = createElement(
       'div',
       'sprint_header-unlearn',
-      `Слова с ошибками - ${this.unlearnedWords.length}`,
+      `Слова с ошибками - ${unlearnedWords.length}`,
     );
     showTotalRes.innerHTML = `Набрано ${this.pointsTotal} очков`;
-    showExperience.innerHTML = `Получено +${this.learnedWords.length + this.unlearnedWords.length} опыта`;
+    showExperience.innerHTML = `Получено +${learnedWords.length + unlearnedWords.length} опыта`;
     const blockBtn = createElement('div', 'sprint_btn-block-over');
     const endGame = createElement('button', 'waves-effect waves-light btn left-sptint-btn end', 'перейти в учебник');
     gameOver.pause();
     endGame.tabIndex = 0;
 
-    if (this.learnedWords.length) {
-      Promise.all(this.learnedWords).then((res) => {
+    if (learnedWords.length) {
+      Promise.all(learnedWords).then((res) => {
         for (let i = 0; i < res.length; i += 1) {
           const audio = new Audio();
           const audioBlock = createElement(
@@ -623,8 +627,8 @@ export class SprintGameView {
       });
     }
 
-    if (this.unlearnedWords.length) {
-      Promise.all(this.unlearnedWords).then((res) => {
+    if (unlearnedWords.length) {
+      Promise.all(unlearnedWords).then((res) => {
         for (let i = 0; i < res.length; i += 1) {
           const audio = new Audio();
           const audioBlock = createElement(
@@ -737,7 +741,7 @@ export class SprintGameView {
     this.pointsResult = [];
     this.learnedWords = [];
     this.unlearnedWords = [];
-    window.removeEventListener('keydown', this.handleKeypress);
+    window.removeEventListener('keyup', this.handleKeypress);
     if (document.fullscreenElement) document.exitFullscreen();
   }
 }

@@ -56,7 +56,18 @@ export class AppView {
   public hideFooter() {
     this.footer.style.display = 'none';
   }
+
   public showFooter() {
     this.footer.style.display = 'block';
+  }
+
+  public cleanAppBody() {
+    this.header.remove();
+    this.main.remove();
+    this.footer.remove();
+
+    document.body.innerHTML = '';
+
+    document.body.append(this.header, this.main, this.footer);
   }
 }

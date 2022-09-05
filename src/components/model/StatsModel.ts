@@ -51,13 +51,13 @@ class StatsModel {
     correctArr.forEach((word) => {
       const { optional, difficulty } = word;
       if (optional) {
-        const { learned, games } = optional;
+        const { games } = optional;
         const { total, wins } = games.phrase;
 
-        if ((wins + 1) % 5 === 0 && difficulty === 'difficult' && learned === 'no') {
+        if ((wins + 1) % 5 === 0 && difficulty === 'difficult') {
           stats.optional.long[dateToday].learnedWords += 1;
         }
-        if ((wins + 1) % 3 === 0 && difficulty !== 'difficult' && learned === 'no') {
+        if ((wins + 1) % 3 === 0 && difficulty === 'normal') {
           stats.optional.long[dateToday].learnedWords += 1;
         }
 
@@ -143,17 +143,17 @@ class StatsModel {
   public async postCorrect(word: Word | UserWordPlus) {
     const oldWord = word as UserWordPlus;
     const { optional, difficulty } = oldWord;
-    const { games, learned } = optional;
+    const { games } = optional;
     const dateToday = this.createDateStr();
     const newStats = await this.getOrCreateUserStats();
 
     const game = window.location.hash.slice(1).split('#')[0] as 'sprint' | 'audio' | 'phrase';
     const { wins } = games[game];
 
-    if ((wins + 1) % 5 === 0 && difficulty === 'difficult' && learned === 'no') {
+    if ((wins + 1) % 5 === 0 && difficulty === 'difficult') {
       newStats.optional.long[dateToday].learnedWords += 1;
     }
-    if ((wins + 1) % 3 === 0 && difficulty !== 'difficult' && learned === 'no') {
+    if ((wins + 1) % 3 === 0 && difficulty === 'normal') {
       newStats.optional.long[dateToday].learnedWords += 1;
     }
 
@@ -173,6 +173,7 @@ class StatsModel {
   }
 
   public async postBestSeries(num: number) {
+    if (!num) return;
     const userJSON = localStorage.getItem('user');
     if (!userJSON) return;
 

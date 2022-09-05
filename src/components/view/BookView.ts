@@ -47,7 +47,9 @@ export class BookView {
     this.mainDiv.innerHTML = '';
 
     if (level !== undefined) this.levelNumber = level;
+    else this.levelNumber = 0;
     if (page !== undefined) this.pageNumber = page;
+    this.pageNumber = 0;
 
     const bookWrap = createElement('div', 'book-wrap', '', 'book-wrap');
     this.mainDiv.appendChild(bookWrap);
@@ -58,7 +60,7 @@ export class BookView {
       </div>
     </div>
  
-     <div class="parallax"><img src="assets/images/violet-1.jpg" alt="violet" class = "img-parallax" id = "img-1"></div>`;
+     <div class="parallax"><img src="" alt="violet" class = "img-parallax" id = "img-1"></div>`;
 
     bookWrap.appendChild(title);
 
@@ -99,11 +101,12 @@ export class BookView {
 
     const bottom = createElement('div', 'parallax-container valign-wrapper bottom-lang');
     bottom.innerHTML = `
-     <div class="parallax"><img src="assets/images/violet-3.jpg" alt="violet" class = "img-parallax" id = "img-3"></div>`;
+     <div class="parallax"><img src="" alt="violet" class = "img-parallax" id = "img-3"></div>`;
 
     bookWrap.appendChild(bottom);
 
-    if (level && level !== 0) this.switchImages(level);
+    if (level !== undefined) this.switchImages(level);
+    else this.switchImages(0);
 
     this.learnedMessage = createElement('div', 'learned-message', 'Cлова на этой странице изучены!');
     bookWrap.appendChild(this.learnedMessage);

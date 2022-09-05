@@ -178,7 +178,8 @@
     bottom: 0;
     background: #ffffff;
     width: 450px;
-    height: 74vh;
+    max-height: 74vh;
+    height: fit-content;
     border-radius: 3px;
     transition: 0.3s;
     &:hover {

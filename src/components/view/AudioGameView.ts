@@ -22,7 +22,6 @@ export class AudioGameView {
   unlearnedWords: string[][];
   countBestRes: number;
   bestResult: number[];
-  timeOut: number;
   audio: HTMLAudioElement;
   handleVolumepress: (el: KeyboardEvent) => void;
   handleKeypress: (el: KeyboardEvent) => void;
@@ -45,7 +44,6 @@ export class AudioGameView {
     this.audio = new Audio();
     this.countBestRes = 0;
     this.bestResult = [0];
-    this.timeOut = 2200;
     this.handleVolumepress = () => {};
     this.handleKeypress = () => {};
     this.handleMainKeypress = () => {};

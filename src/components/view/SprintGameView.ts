@@ -24,6 +24,7 @@ export class SprintGameView {
   learnedWords: string[][];
   unlearnedWords: string[][];
   handleKeypress: (event: KeyboardEvent) => void;
+  downloadTimer?: NodeJS.Timer;
 
   constructor(mainDiv: HTMLElement) {
     this.mainDiv = mainDiv;
@@ -43,6 +44,7 @@ export class SprintGameView {
     this.countBestRes = 0;
     this.bestResult = [0];
     this.handleKeypress = () => {};
+    this.downloadTimer = setTimeout(() => {});
   }
 
   public render(data?: Word[], user?: LoginData): void {
@@ -280,10 +282,10 @@ export class SprintGameView {
     wordName.innerHTML = `${mixData[0].en}   -   ${mixData[0].ru}`;
     wordName.appendChild(audioBlock);
 
-    const downloadTimer = setInterval(() => {
+    this.downloadTimer = setInterval(() => {
       seconds.innerHTML = `:${this.timeleft}`;
       if (this.timeleft <= 0) {
-        clearInterval(downloadTimer);
+        clearInterval(this.downloadTimer);
         this.endGame();
       }
       this.timeleft -= 1;
@@ -728,9 +730,7 @@ export class SprintGameView {
     this.soundImg.classList.remove('sprint_not-sound');
     this.bestResult = [0];
     this.countBestRes = 0;
-    this.bestResult = [0];
-    this.countBestRes = 0;
-    this.timeleft = 0;
+    clearInterval(this.downloadTimer);
     this.points = 10;
     this.pointsTotal = 0;
     this.pointsTotalResult = [];

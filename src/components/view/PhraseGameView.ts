@@ -317,7 +317,7 @@ export class PhraseGameView {
     learnWords.append(headerListLerned);
     unlearnWords.append(headerListUnlerned);
     showTotalRes.innerHTML = `Набрано ${rightDataPhrase.length * 10} очков`;
-    showExperience.innerHTML = `Получено +100 опыта`;
+    showExperience.innerHTML = `Получено +10 опыта`;
     const blockBtn = createElement('div', 'sprint_btn-block-over');
     const endGame = createElement('button', 'waves-effect waves-light btn left-sptint-btn end', 'перейти в учебник');
     gameOver.pause();

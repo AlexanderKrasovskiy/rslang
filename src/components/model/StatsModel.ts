@@ -51,13 +51,13 @@ class StatsModel {
     correctArr.forEach((word) => {
       const { optional, difficulty } = word;
       if (optional) {
-        const { learned, games } = optional;
+        const { games } = optional;
         const { total, wins } = games.phrase;
 
-        if ((wins + 1) % 5 === 0 && difficulty === 'difficult' && learned === 'no') {
+        if ((wins + 1) % 5 === 0 && difficulty === 'difficult') {
           stats.optional.long[dateToday].learnedWords += 1;
         }
-        if ((wins + 1) % 3 === 0 && difficulty !== 'difficult' && learned === 'no') {
+        if ((wins + 1) % 3 === 0 && difficulty === 'normal') {
           stats.optional.long[dateToday].learnedWords += 1;
         }
 
@@ -115,64 +115,82 @@ class StatsModel {
   public async postWrong(word: Word | UserWordPlus) {
     const oldWord = word as UserWordPlus;
     const { optional } = oldWord;
-    const { learnDate, learned, games } = optional;
 
-    const newStats = await this.getOrCreateUserStats();
-
-    if (learned === 'yes') {
-      const dateStr = this.createDateStr(learnDate); // oldDate
-      newStats.optional.long[dateStr].learnedWords -= 1;
-    }
-
+    const stats = await this.getOrCreateUserStats();
+    const dateToday = this.createDateStr();
     const game = window.location.hash.slice(1).split('#')[0] as 'sprint' | 'audio' | 'phrase';
-    const [a, b, c] = Object.values(games);
-    const total = a.total + b.total + c.total;
 
-    if (total === 0) {
-      const dateToday = this.createDateStr();
-      newStats.optional.today[game].newWords += 1;
-      newStats.optional.long[dateToday].newWords += 1;
+    if (optional) {
+      const { learnDate, learned, games } = optional;
+
+      if (learned === 'yes') {
+        const dateStr = this.createDateStr(learnDate); // oldDate
+        stats.optional.long[dateStr].learnedWords -= 1;
+      }
+
+      const [a, b, c] = Object.values(games);
+      const total = a.total + b.total + c.total;
+
+      if (total === 0) {
+        stats.optional.today[game].newWords += 1;
+        stats.optional.long[dateToday].newWords += 1;
+      }
+
+      stats.optional.today[game].total += 1; // wins += 0
+    } else {
+      stats.optional.today[game].newWords += 1;
+      stats.optional.long[dateToday].newWords += 1;
+
+      stats.optional.today[game].total += 1; // wins += 0
     }
-
-    newStats.optional.today[game].total += 1; // wins += 0
 
     const { id, token } = this.getStorageUserData();
-    await postUserStats(id, token, newStats);
+    await postUserStats(id, token, stats);
   }
 
   public async postCorrect(word: Word | UserWordPlus) {
     const oldWord = word as UserWordPlus;
     const { optional, difficulty } = oldWord;
-    const { games, learned } = optional;
+
+    const stats = await this.getOrCreateUserStats();
     const dateToday = this.createDateStr();
-    const newStats = await this.getOrCreateUserStats();
-
     const game = window.location.hash.slice(1).split('#')[0] as 'sprint' | 'audio' | 'phrase';
-    const { wins } = games[game];
 
-    if ((wins + 1) % 5 === 0 && difficulty === 'difficult' && learned === 'no') {
-      newStats.optional.long[dateToday].learnedWords += 1;
+    if (optional) {
+      const { games } = optional;
+      const { wins } = games[game];
+
+      if ((wins + 1) % 5 === 0 && difficulty === 'difficult') {
+        stats.optional.long[dateToday].learnedWords += 1;
+      }
+      if ((wins + 1) % 3 === 0 && difficulty === 'normal') {
+        stats.optional.long[dateToday].learnedWords += 1;
+      }
+
+      const [a, b, c] = Object.values(games);
+      const total = a.total + b.total + c.total;
+
+      if (total === 0) {
+        stats.optional.today[game].newWords += 1;
+        stats.optional.long[dateToday].newWords += 1;
+      }
+
+      stats.optional.today[game].wins += 1;
+      stats.optional.today[game].total += 1;
+    } else {
+      stats.optional.today[game].newWords += 1;
+      stats.optional.long[dateToday].newWords += 1;
+
+      stats.optional.today[game].wins += 1;
+      stats.optional.today[game].total += 1;
     }
-    if ((wins + 1) % 3 === 0 && difficulty !== 'difficult' && learned === 'no') {
-      newStats.optional.long[dateToday].learnedWords += 1;
-    }
-
-    const [a, b, c] = Object.values(games);
-    const total = a.total + b.total + c.total;
-
-    if (total === 0) {
-      newStats.optional.today[game].newWords += 1;
-      newStats.optional.long[dateToday].newWords += 1;
-    }
-
-    newStats.optional.today[game].wins += 1;
-    newStats.optional.today[game].total += 1;
 
     const { id, token } = this.getStorageUserData();
-    await postUserStats(id, token, newStats);
+    await postUserStats(id, token, stats);
   }
 
   public async postBestSeries(num: number) {
+    if (!num) return;
     const userJSON = localStorage.getItem('user');
     if (!userJSON) return;
 

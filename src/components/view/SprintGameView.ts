@@ -24,6 +24,7 @@ export class SprintGameView {
   learnedWords: string[][];
   unlearnedWords: string[][];
   handleKeypress: (event: KeyboardEvent) => void;
+  downloadTimer?: NodeJS.Timer;
 
   constructor(mainDiv: HTMLElement) {
     this.mainDiv = mainDiv;
@@ -43,6 +44,7 @@ export class SprintGameView {
     this.countBestRes = 0;
     this.bestResult = [0];
     this.handleKeypress = () => {};
+    this.downloadTimer = setTimeout(() => {});
   }
 
   public render(data?: Word[], user?: LoginData): void {
@@ -280,10 +282,10 @@ export class SprintGameView {
     wordName.innerHTML = `${mixData[0].en}   -   ${mixData[0].ru}`;
     wordName.appendChild(audioBlock);
 
-    const downloadTimer = setInterval(() => {
+    this.downloadTimer = setInterval(() => {
       seconds.innerHTML = `:${this.timeleft}`;
       if (this.timeleft <= 0) {
-        clearInterval(downloadTimer);
+        clearInterval(this.downloadTimer);
         this.endGame();
       }
       this.timeleft -= 1;
@@ -326,11 +328,11 @@ export class SprintGameView {
         }
         index += 1;
       } else {
-        window.removeEventListener('keydown', this.handleKeypress);
+        window.removeEventListener('keyup', this.handleKeypress);
       }
     };
 
-    window.addEventListener('keydown', this.handleKeypress);
+    window.addEventListener('keyup', this.handleKeypress);
 
     btnRight.onclick = async () => {
       await this.rightChoice(
@@ -532,19 +534,19 @@ export class SprintGameView {
   private async correctUserWord(word: Word | UserWordPlus, user: LoginData) {
     const userWord = word;
     await statsModel.postCorrect(userWord);
-    (<UserWordPlus>userWord).optional.games.audio.wins += 1;
-    (<UserWordPlus>userWord).optional.games.audio.total += 1;
+    (<UserWordPlus>userWord).optional.games.sprint.wins += 1;
+    (<UserWordPlus>userWord).optional.games.sprint.total += 1;
 
     if (
       (<UserWordPlus>userWord).difficulty === 'normal' &&
-      (<UserWordPlus>userWord).optional.games.audio.wins % 3 === 0
+      (<UserWordPlus>userWord).optional.games.sprint.wins % 3 === 0
     ) {
       (<UserWordPlus>userWord).difficulty = 'easy';
       (<UserWordPlus>userWord).optional.learned = 'yes';
       (<UserWordPlus>userWord).optional.learnDate = Date.now();
     } else if (
       (<UserWordPlus>userWord).difficulty === 'difficult' &&
-      (<UserWordPlus>userWord).optional.games.audio.wins % 5 === 0
+      (<UserWordPlus>userWord).optional.games.sprint.wins % 5 === 0
     ) {
       (<UserWordPlus>userWord).difficulty = 'easy';
       (<UserWordPlus>userWord).optional.learned = 'yes';
@@ -560,7 +562,7 @@ export class SprintGameView {
   private async incorrectUserWord(word: Word | UserWordPlus, user: LoginData) {
     const userWord = word;
     await statsModel.postWrong(userWord);
-    (<UserWordPlus>userWord).optional.games.audio.total += 1;
+    (<UserWordPlus>userWord).optional.games.sprint.total += 1;
     if ((<UserWordPlus>userWord).optional.learned === 'yes') {
       (<UserWordPlus>userWord).difficulty = 'normal';
       (<UserWordPlus>userWord).optional.learned = 'no';
@@ -584,25 +586,29 @@ export class SprintGameView {
     const unlearnWords = createElement('ul', 'sprint_list-words');
     const headerBlock = createElement('div', 'sprint_header-result');
     const allWords = createElement('ul', 'sprint_all-words');
+    const arrStr1 = this.learnedWords.map((a) => JSON.stringify(a));
+    const learnedWords = [...new Set(arrStr1)].map((e) => JSON.parse(e));
+    const arrStr2 = this.unlearnedWords.map((a) => JSON.stringify(a));
+    const unlearnedWords = [...new Set(arrStr2)].map((e) => JSON.parse(e));
     const headerListLerned = createElement(
       'div',
       'sprint_header-learn',
-      `Угаданные слова - ${this.learnedWords.length}`,
+      `Угаданные слова - ${learnedWords.length}`,
     );
     const headerListUnlerned = createElement(
       'div',
       'sprint_header-unlearn',
-      `Слова с ошибками - ${this.unlearnedWords.length}`,
+      `Слова с ошибками - ${unlearnedWords.length}`,
     );
     showTotalRes.innerHTML = `Набрано ${this.pointsTotal} очков`;
-    showExperience.innerHTML = `Получено +${this.learnedWords.length + this.unlearnedWords.length} опыта`;
+    showExperience.innerHTML = `Получено +${learnedWords.length + unlearnedWords.length} опыта`;
     const blockBtn = createElement('div', 'sprint_btn-block-over');
     const endGame = createElement('button', 'waves-effect waves-light btn left-sptint-btn end', 'перейти в учебник');
     gameOver.pause();
     endGame.tabIndex = 0;
 
-    if (this.learnedWords.length) {
-      Promise.all(this.learnedWords).then((res) => {
+    if (learnedWords.length) {
+      Promise.all(learnedWords).then((res) => {
         for (let i = 0; i < res.length; i += 1) {
           const audio = new Audio();
           const audioBlock = createElement(
@@ -621,8 +627,8 @@ export class SprintGameView {
       });
     }
 
-    if (this.unlearnedWords.length) {
-      Promise.all(this.unlearnedWords).then((res) => {
+    if (unlearnedWords.length) {
+      Promise.all(unlearnedWords).then((res) => {
         for (let i = 0; i < res.length; i += 1) {
           const audio = new Audio();
           const audioBlock = createElement(
@@ -728,16 +734,14 @@ export class SprintGameView {
     this.soundImg.classList.remove('sprint_not-sound');
     this.bestResult = [0];
     this.countBestRes = 0;
-    this.bestResult = [0];
-    this.countBestRes = 0;
-    this.timeleft = 0;
+    clearInterval(this.downloadTimer);
     this.points = 10;
     this.pointsTotal = 0;
     this.pointsTotalResult = [];
     this.pointsResult = [];
     this.learnedWords = [];
     this.unlearnedWords = [];
-    window.removeEventListener('keydown', this.handleKeypress);
+    window.removeEventListener('keyup', this.handleKeypress);
     if (document.fullscreenElement) document.exitFullscreen();
   }
 }

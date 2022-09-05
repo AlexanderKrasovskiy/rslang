@@ -54,6 +54,7 @@ export class AppController {
 
       if (this.prevRoute === Route.sprint) this.sprint.stopGame();
       if (this.prevRoute === Route.audio) this.audio.stopGame();
+      if (this.prevRoute === Route.book && route !== Route.book) this.appView.cleanAppBody();
       this.prevRoute = route;
 
       this.renderNewPage([route, level, page]);

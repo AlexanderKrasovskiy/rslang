@@ -54,7 +54,7 @@ export class Card {
     this.diffDifficultLevel = createElement('div', 'diff-difficult-level tooltipped');
     if (userJSON && level === 6) {
       this.diffDifficultLevel.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
-      this.diffDifficultLevel.setAttribute('data-position', 'right');
+      this.diffDifficultLevel.setAttribute('data-position', 'left');
       this.diffDifficultLevel.setAttribute('data-tooltip', 'Не сложно!');
       wordImgWrap.appendChild(this.diffDifficultLevel);
     }

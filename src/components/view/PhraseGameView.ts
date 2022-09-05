@@ -304,8 +304,8 @@ export class PhraseGameView {
     const showTotalRes = createElement('div', 'sprint_result');
     const showExperience = createElement('div', 'sprint_show-resultexperience');
     const gameOver = <HTMLAudioElement>new Audio('./assets/audio/over.mp3');
-    const learnWords = createElement('ul', 'sprint_list-words');
-    const unlearnWords = createElement('ul', 'sprint_list-words');
+    const learnWords = createElement('ul', 'phrase_list-words');
+    const unlearnWords = createElement('ul', 'phrase_list-words');
     const headerBlock = createElement('div', 'sprint_header-result');
     const allWords = createElement('ul', 'sprint_all-words');
     const headerListLerned = createElement('div', 'phrase_header-learn', `Угаданные слова - ${rightDataPhrase.length}`);

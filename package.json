@@ -1,0 +1,52 @@
+{
+    "name": "webpack_build",
+    "version": "1.0.0",
+    "description": "",
+    "private": "true",
+    "scripts": {
+        "start": "set NODE_ENV=dev&&webpack serve",
+        "watch": "set NODE_ENV=dev&&webpack --watch",
+        "dev": "set NODE_ENV=dev&&webpack",
+        "build": "set NODE_ENV=prod&&webpack",
+        "lint": "eslint ./src --ext .js,.ts",
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/jest": "^28.1.6",
+        "@types/materialize-css": "^1.0.11",
+        "@types/webpack-env": "^1.17.0",
+        "@typescript-eslint/eslint-plugin": "^5.31.0",
+        "@typescript-eslint/parser": "^5.31.0",
+        "copy-webpack-plugin": "^11.0.0",
+        "css-loader": "^6.7.1",
+        "eslint": "^8.20.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-airbnb-typescript": "^17.0.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-import-resolver-typescript": "^3.2.1",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-webpack-plugin": "^3.2.0",
+        "html-webpack-plugin": "^5.5.0",
+        "jest": "^28.1.3",
+        "materialize-css": "^1.0.0-rc.2",
+        "mini-css-extract-plugin": "^2.6.0",
+        "prettier": "2.6.2",
+        "sass": "^1.53.0",
+        "sass-loader": "^12.6.0",
+        "style-loader": "^3.3.1",
+        "ts-jest": "^28.0.6",
+        "ts-loader": "^9.3.1",
+        "typescript": "^4.7.4",
+        "webpack": "^5.72.0",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.8.1"
+    },
+    "dependencies": {
+        "chartist": "^1.1.2",
+        "materialize-css": "^1.0.0-rc.2"
+    }
+}

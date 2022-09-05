@@ -1,0 +1,125 @@
+.word-img-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    position: relative;
+}
+
+.words-wrap {
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-image {
+    width: 12rem;
+    height: 12rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    border-bottom-left-radius: 3px;
+    flex-shrink: 2;
+}
+
+.card .card-content {
+    padding: 1rem;
+    width: 27rem;
+}
+
+.p-lang {
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+    padding: 0.2rem;
+}
+
+.word {
+    font-weight: 700;
+    font-size: 1.9rem;
+    padding-bottom: 0.8rem;
+}
+
+.word-translate {
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding-top: 0.5rem;
+    text-align: center;
+}
+
+.meaning,
+.example {
+    font-weight: 700;
+}
+
+.volume-up {
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: 0.5s;
+    &:hover {
+        color: black;
+        transform: scale(1.1);
+    }
+}
+
+.volume-active {
+    color: black;
+    transform: scale(1.4);
+}
+
+.divider-lang {
+    margin: 0.2rem 0;
+}
+
+.difficult,
+.learn,
+.diff-difficult-level,
+.learn-difficult-level {
+    width: 1.3rem;
+    height: 3rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -0.7rem;
+    cursor: pointer;
+    transition: 0.1s;
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.difficult {
+    left: 0.6rem;
+}
+
+.learn {
+    left: 2.6rem;
+}
+
+.diff-difficult-level {
+    left: 0.6rem;
+}
+
+.learn-difficult-level {
+    left: 2.6rem;
+}
+
+.word-progress {
+    height: max-content;
+}
+
+.collapsible-lang {
+    margin: 0.7rem 0 0 0;
+}
+
+.collapsible-header-lang {
+    padding: 0.5rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.collapsible-body-lang {
+    padding: 1rem;
+    font-size: 0.9rem;
+}

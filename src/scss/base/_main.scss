@@ -1,0 +1,247 @@
+nav ul a,
+nav .brand-logo {
+    color: white;
+}
+
+p {
+    line-height: 2rem;
+}
+
+.sidenav-trigger {
+    color: #26a69a;
+}
+
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 2rem;
+}
+
+.parallax-container .section {
+    width: 100%;
+}
+
+.parallax {
+    overflow: hidden;
+}
+
+.img-parallax {
+    display: block;
+    max-width: 100rem;
+    min-width: 100%;
+}
+
+.main-text-lang {
+    font-size: 1.5rem;
+    padding: 1.5rem 0 2rem 0;
+    line-height: 150%;
+}
+
+.team-info {
+    text-align: justify;
+}
+
+.main-github {
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    .main-github__image {
+        margin-left: 1rem;
+        width: 2rem;
+        height: 2rem;
+        background-image: url(../assets/svg/github-icon-black.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.6;
+    }
+    .main-github__link {
+        width: fit-content;
+        height: fit-content;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+    #index-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #index-banner .section {
+        top: 0;
+    }
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+footer.page-footer {
+    margin: 0;
+}
+
+.alexander,
+.svetlana {
+    width: 5rem;
+    height: 5rem;
+}
+
+.alexander {
+    background-image: url(../assets/svg/wizard-1.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.alla {
+    background-image: url(../assets/svg/witch-1.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 6rem;
+    height: 6rem;
+}
+
+.svetlana {
+    background-image: url(../assets/svg/fairy-4.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.avatar-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.6rem;
+}
+
+.avatar-wrap-alla {
+    margin-top: 0.9rem;
+    margin-bottom: 0;
+}
+
+.about-app-title {
+    font-size: 1.7rem;
+    font-weight: 400;
+    padding: 2rem 0;
+}
+
+.about-app-title_games {
+    padding: 0;
+}
+
+.about-app-title_stats {
+    padding: 2.5rem 0 1rem 0;
+}
+
+.about-app-title_book {
+    padding: 0 0 1rem 0;
+}
+
+.list-lang {
+    font-size: 1.2rem;
+}
+
+.main-games {
+    justify-content: center;
+    display: flex;
+    gap: 3rem;
+    padding: 1rem 0 0 0;
+}
+
+.about-app-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+}
+
+.about-app-wrap__small {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.about-app-book,
+.about-app-stat,
+.about-app-games {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 2rem 3rem;
+}
+
+.about-app-book {
+    width: 49%;
+}
+
+.about-app-stat {
+    width: 49%;
+}
+
+.about-app-games {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    padding-top: 1.8rem;
+}
+
+.about-app-title-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.about-app-btn {
+    height: fit-content;
+}
+
+.about-app-phrase1 {
+    color: #107a02;
+}
+
+.about-app-phrase4 {
+    color: #08703c;
+}
+
+.about-app-phrase2 {
+    display: inline-block;
+    padding-top: 0.8rem;
+    color: #840b0b;
+    font-size: 1.2rem;
+}
+
+.about-app-wrap ul:not(.browser-default)>li::marker {
+    content: '\2713 \A0 \A0';
+}
+
+.btn-lang-main {
+    width: 10rem;
+    margin-top: 1.2rem;
+    color: black;
+    font-weight: 500;
+    background-color: white;
+}
+
+.test1 {
+    align-items: center;
+    justify-content: center;
+}
+
+.lang_team_tags {
+    display: flex;
+    justify-content: center;
+}

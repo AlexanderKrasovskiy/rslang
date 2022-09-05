@@ -1,0 +1,177 @@
+.book-wrap {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.title-lang {
+    min-height: 160px;
+    padding-top: 3rem;
+}
+
+.cards-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.cards {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 4rem;
+    row-gap: 2rem;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 1.2rem 0 4rem 0;
+}
+
+.bottom-lang {
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    width: 100%;
+}
+
+.pagination {
+    height: 160px;
+}
+
+.levels,
+.games {
+    position: sticky;
+    top: 175px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 3px;
+}
+
+.levels-title,
+.games-title {
+    padding: 0.5rem 0;
+    font-weight: 500;
+}
+
+.level-btn {
+    font-size: 1rem;
+    background-color: white;
+    font-weight: 500;
+    width: 90%;
+    height: 2.5rem;
+    min-width: fit-content;
+    max-width: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14), 0 2px 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.level-btn-difficult {
+    font-size: 0.9rem;
+}
+
+.games-btn {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 7rem;
+    height: 7rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14), 0 2px 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+    }
+    .game-title {
+        color: black;
+        text-align: center;
+        font-size: 0.8rem;
+        padding-bottom: 0.3rem;
+    }
+}
+
+.main-btn {
+    width: 5rem;
+    height: 5rem;
+}
+
+.non-acceptable .games-btn {
+    background-color: rgba(0, 0, 0, 0.14);
+}
+
+.game-picture {
+    width: 90%;
+    height: 90%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 300;
+}
+
+.btn-sprint {
+    background-image: url(../assets/svg/run2.svg);
+}
+
+.btn-audio {
+    background-image: url(../assets/svg/audio1.svg);
+}
+
+.btn-collection {
+    background-image: url(../assets/svg/collection1.svg);
+}
+
+.btn-book {
+    background-image: url(../assets/svg/book1.svg);
+}
+
+.btn-stat {
+    background-image: url(../assets/svg/game1.svg);
+}
+
+.learned-message {
+    background-image: url(../assets/svg/message-4.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 600;
+    width: 3.8rem;
+    height: 17rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    position: fixed;
+    top: 0;
+    left: 15%;
+    color: transparent;
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 1001;
+}
+
+.non-transparent {
+    opacity: 1;
+}
+
+.no-difficult-card {
+    font-size: 2rem;
+    font-weight: 600;
+}

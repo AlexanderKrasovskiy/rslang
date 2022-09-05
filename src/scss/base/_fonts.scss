@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/Materialize/material-icons.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto/Roboto-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto/Roboto-Thin.ttf') format('truetype');
+    font-weight: 100;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+    font-family: 'Georgia';
+    src: url('../assets/fonts/georgia/Georgia.ttf'), url('../assets/fonts/georgia/Georgia4.ttf'), url('../assets/fonts/georgia/GeorgiaRegularfont.ttf'), url('../assets/fonts/georgia/GeorgiaBoldItalicfont.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

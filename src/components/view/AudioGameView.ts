@@ -45,7 +45,7 @@ export class AudioGameView {
     this.audio = new Audio();
     this.countBestRes = 0;
     this.bestResult = [0];
-    this.timeOut = 2100;
+    this.timeOut = 2200;
     this.handleVolumepress = () => {};
     this.handleKeypress = () => {};
     this.handleMainKeypress = () => {};
@@ -328,8 +328,7 @@ export class AudioGameView {
       if (index <= mixData.length) {
         keyCode.forEach((key) => {
           if (el.key === key) {
-            this.timeOut = 2500;
-            blockWodsArr.forEach(async (v) => {
+            blockWodsArr.forEach((v) => {
               if (v.textContent?.split(' ').slice(1).join(' ') === mixData[index].ru) v.classList.add('correct');
               const text = v.textContent?.split(' ').slice(1).join(' ');
               if (flagRes) {
@@ -339,12 +338,12 @@ export class AudioGameView {
                   if (text !== mixData[index].ru) {
                     this.createWrongResult(data, mixData[index].en);
                     const userWord = this.findWord(data, mixData[index].en);
-                    if (userWord && user) await this.createNewUserWord(userWord, user);
+                    if (userWord && user) this.createNewUserWord(userWord, user);
                     v.classList.add('wrong');
                     if (userWord && user) {
                       this.bestResult.push(this.countBestRes);
                       this.countBestRes = 0;
-                      await this.incorrectUserWord(userWord, user);
+                      this.incorrectUserWord(userWord, user);
                     }
                     this.createSounds(this.sound, 'false');
                   } else {
@@ -353,7 +352,7 @@ export class AudioGameView {
                     if (userWord && user) {
                       this.countBestRes += 1;
                       this.bestResult.push(this.countBestRes);
-                      await this.correctUserWord(userWord, user);
+                      this.correctUserWord(userWord, user);
                     }
                     this.createSounds(this.sound, 'true');
                     this.pointsTotal += 10;
@@ -364,7 +363,7 @@ export class AudioGameView {
 
               setTimeout(() => {
                 window.addEventListener('keyup', this.handleMainKeypress);
-              }, 2000);
+              }, 800);
               setTimeout(() => {
                 window.addEventListener('keyup', this.handleKeypress);
               }, 3000);
@@ -391,7 +390,7 @@ export class AudioGameView {
       }
     };
 
-    this.handleMainKeypress = async (el: KeyboardEvent) => {
+    this.handleMainKeypress = (el: KeyboardEvent) => {
       mainBtn.disabled = false;
       if (index <= mixData.length) {
         if (el.key === 'Enter') {
@@ -414,8 +413,8 @@ export class AudioGameView {
             if (userWord && user) {
               this.bestResult.push(this.countBestRes);
               this.countBestRes = 0;
-              await this.createNewUserWord(userWord, user);
-              await this.incorrectUserWord(userWord, user);
+              this.createNewUserWord(userWord, user);
+              this.incorrectUserWord(userWord, user);
             }
           } else {
             index += 1;
@@ -448,7 +447,7 @@ export class AudioGameView {
       mainBtn.disabled = false;
     }, 500);
     mainBtn.disabled = true;
-    mainBtn.onclick = async () => {
+    mainBtn.onclick = () => {
       if (index <= mixData.length) {
         if (flag) {
           flag = false;
@@ -470,8 +469,8 @@ export class AudioGameView {
           if (userWord && user) {
             this.bestResult.push(this.countBestRes);
             this.countBestRes = 0;
-            await this.createNewUserWord(userWord, user);
-            await this.incorrectUserWord(userWord, user);
+            this.createNewUserWord(userWord, user);
+            this.incorrectUserWord(userWord, user);
           }
         } else {
           index += 1;
@@ -499,7 +498,7 @@ export class AudioGameView {
 
     blockWodsArr.forEach((el) => {
       const btn = el;
-      btn.onclick = async () => {
+      btn.onclick = () => {
         blockWodsArr.forEach((v) => {
           const click = v;
           if (click.textContent?.split(' ').slice(1).join(' ') === mixData[index].ru) v.classList.add('correct');
@@ -508,13 +507,13 @@ export class AudioGameView {
         const text = btn.textContent?.split(' ').slice(1).join(' ');
         if (flagRes) {
           const userWord = this.findWord(data, mixData[index].en);
-          if (userWord && user) await this.createNewUserWord(userWord, user);
+          if (userWord && user) this.createNewUserWord(userWord, user);
           if (text !== mixData[index].ru) {
             btn.classList.add('wrong');
             if (userWord && user) {
               this.bestResult.push(this.countBestRes);
               this.countBestRes = 0;
-              await this.incorrectUserWord(userWord, user);
+              this.incorrectUserWord(userWord, user);
             }
             this.createWrongResult(data, mixData[index].en);
             this.createSounds(this.sound, 'false');
@@ -522,7 +521,7 @@ export class AudioGameView {
             if (userWord && user) {
               this.countBestRes += 1;
               this.bestResult.push(this.countBestRes);
-              await this.correctUserWord(userWord, user);
+             this.correctUserWord(userWord, user);
             }
             this.createCorrectResult(data, mixData[index].en);
             this.createSounds(this.sound, 'true');
@@ -592,7 +591,7 @@ export class AudioGameView {
     }, 2000);
     const imt2 = setTimeout(() => {
       window.addEventListener('keyup', this.handleMainKeypress);
-    }, this.timeOut);
+    }, 2200);
 
     if (index === mixData.length) {
       clearInterval(imt2);
@@ -600,7 +599,6 @@ export class AudioGameView {
       window.removeEventListener('keyup', this.handleMainKeypress);
       window.removeEventListener('keyup', this.handleMainKeypress);
     }
-    this.timeOut = 2100;
   }
 
   private pressMainButtonAnswer = (
@@ -622,7 +620,7 @@ export class AudioGameView {
     mainBlock.innerHTML = '';
     wordName.appendChild(audioBlock);
     mainBlock.append(word);
-    blockWodsArr.forEach(async (v) => {
+    blockWodsArr.forEach((v) => {
       const btn = v;
       if (btn.textContent?.split(' ').slice(1).join(' ') === mixData[index].ru) {
         btn.classList.add('correct');

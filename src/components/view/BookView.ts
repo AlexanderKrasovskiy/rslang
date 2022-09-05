@@ -47,9 +47,7 @@ export class BookView {
     this.mainDiv.innerHTML = '';
 
     if (level !== undefined) this.levelNumber = level;
-    else this.levelNumber = 0;
     if (page !== undefined) this.pageNumber = page;
-    this.pageNumber = 0;
 
     const bookWrap = createElement('div', 'book-wrap', '', 'book-wrap');
     this.mainDiv.appendChild(bookWrap);
@@ -106,7 +104,6 @@ export class BookView {
     bookWrap.appendChild(bottom);
 
     if (level !== undefined) this.switchImages(level);
-    else this.switchImages(0);
 
     this.learnedMessage = createElement('div', 'learned-message', 'Cлова на этой странице изучены!');
     bookWrap.appendChild(this.learnedMessage);

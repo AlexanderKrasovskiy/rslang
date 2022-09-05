@@ -141,6 +141,23 @@
     }
 }
 
+.audio_line-result {
+    position: absolute;
+    top: 10px;
+    width: 600px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.audio_line-inner {
+    width: 0px;
+    height: 100%;
+    background-color: #84e2d1;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
 .title-audio,
 .subtitle-audio {
     color: white;

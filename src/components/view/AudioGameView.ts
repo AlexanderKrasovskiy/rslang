@@ -45,7 +45,7 @@ export class AudioGameView {
     this.audio = new Audio();
     this.countBestRes = 0;
     this.bestResult = [0];
-    this.timeOut = 2300;
+    this.timeOut = 2100;
     this.handleVolumepress = () => {};
     this.handleKeypress = () => {};
     this.handleMainKeypress = () => {};
@@ -269,6 +269,8 @@ export class AudioGameView {
   private showGame(data: WordPlusUserWord[], user?: LoginData): HTMLElement {
     const mixData = getMixWordsForAudio(data);
     const contentGame = createElement('div', 'audio_game-container');
+    const lineResult = createElement('div', 'audio_line-result');
+    const innerLineRes = createElement('div', 'audio_line-inner');
     const word = createElement('div', 'audio_word card');
     const wordName = createElement('div', 'audio_word-name');
     const audioBlock = createElement(
@@ -287,6 +289,7 @@ export class AudioGameView {
     const imgDiv = createElement('div', 'audio_img-word');
     volumeBtn.tabIndex = 0;
     let index = 0;
+    let widthLineRes = 600 / mixData.length;
     imgDiv.style.backgroundImage = `url(${HOST}/${mixData[0].image})`;
     this.audio.src = `${HOST}/${mixData[index].audio}`;
     audioBlock.onclick = () => {
@@ -361,7 +364,7 @@ export class AudioGameView {
 
               setTimeout(() => {
                 window.addEventListener('keyup', this.handleMainKeypress);
-              }, 2500);
+              }, 2000);
               setTimeout(() => {
                 window.addEventListener('keyup', this.handleKeypress);
               }, 3000);
@@ -394,7 +397,7 @@ export class AudioGameView {
         if (el.key === 'Enter') {
           if (flag) {
             flag = false;
-            window.removeEventListener('keyup', this.handleMainKeypress);
+            window.addEventListener('keyup', this.handleMainKeypress);
             this.pressMainButtonAnswer(
               mainBtn,
               data,
@@ -416,6 +419,8 @@ export class AudioGameView {
             }
           } else {
             index += 1;
+             innerLineRes.style.width = `${widthLineRes}px`
+             widthLineRes += 600 / mixData.length
             setTimeout(() => {
               window.addEventListener('keyup', this.handleKeypress);
               window.removeEventListener('keyup', this.handleMainKeypress);
@@ -470,6 +475,8 @@ export class AudioGameView {
           }
         } else {
           index += 1;
+          innerLineRes.style.width = `${widthLineRes}px`
+          widthLineRes += 600 / mixData.length
           this.addAnimation(contentGame, mixData, index);
           flag = true;
           flagRes = true;
@@ -551,6 +558,7 @@ export class AudioGameView {
       window.addEventListener('keyup', this.handleMainKeypress);
     }, 2300);
     window.addEventListener('keyup', this.handleVolumepress);
+    lineResult.append(innerLineRes)
     wordName.appendChild(audioBlock);
     word.append(imgDiv);
     word.append(wordName);
@@ -558,6 +566,7 @@ export class AudioGameView {
     contentGame.append(mainBlock);
     contentGame.append(blockBtn);
     contentGame.append(mainBtn);
+    this.stateGame.append(lineResult);
     this.stateGame.append(contentGame);
     return this.stateGame;
   }
@@ -591,7 +600,7 @@ export class AudioGameView {
       window.removeEventListener('keyup', this.handleMainKeypress);
       window.removeEventListener('keyup', this.handleMainKeypress);
     }
-    this.timeOut = 2300;
+    this.timeOut = 2100;
   }
 
   private pressMainButtonAnswer = (

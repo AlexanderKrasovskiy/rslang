@@ -23,6 +23,9 @@ export class AudioGameView {
   countBestRes: number;
   bestResult: number[];
   audio: HTMLAudioElement;
+  set1?: NodeJS.Timer;
+  set2?: NodeJS.Timer;
+  set3?: NodeJS.Timer;
   handleVolumepress: (el: KeyboardEvent) => void;
   handleKeypress: (el: KeyboardEvent) => void;
   handleMainKeypress: (el: KeyboardEvent) => void;
@@ -47,6 +50,9 @@ export class AudioGameView {
     this.handleVolumepress = () => {};
     this.handleKeypress = () => {};
     this.handleMainKeypress = () => {};
+    this.set1 = setTimeout(() => {});
+    this.set2 = setTimeout(() => {});
+    this.set3 = setTimeout(() => {});
   }
 
   public render(data?: WordPlusUserWord[], user?: LoginData): void {
@@ -359,7 +365,7 @@ export class AudioGameView {
                 }
               }
 
-              setTimeout(() => {
+              this.set1 = setTimeout(() => {
                 window.addEventListener('keyup', this.handleMainKeypress);
               }, 800);
               setTimeout(() => {
@@ -394,7 +400,7 @@ export class AudioGameView {
         if (el.key === 'Enter') {
           if (flag) {
             flag = false;
-            window.addEventListener('keyup', this.handleMainKeypress);
+            this.set3 = setTimeout(() => { window.addEventListener('keyup', this.handleMainKeypress);}, 0);
             this.pressMainButtonAnswer(
               mainBtn,
               data,
@@ -587,12 +593,12 @@ export class AudioGameView {
     const imt1 = setTimeout(() => {
       window.addEventListener('keyup', this.handleKeypress);
     }, 2000);
-    const imt2 = setTimeout(() => {
+    this.set2 = setTimeout(() => {
       window.addEventListener('keyup', this.handleMainKeypress);
     }, 2200);
 
     if (index === mixData.length) {
-      clearInterval(imt2);
+      clearInterval(this.set2);
       clearInterval(imt1);
       window.removeEventListener('keyup', this.handleMainKeypress);
       window.removeEventListener('keyup', this.handleMainKeypress);
@@ -884,6 +890,9 @@ export class AudioGameView {
     this.pointsResult = [];
     this.learnedWords = [];
     this.unlearnedWords = [];
+    clearInterval(this.set1);
+    clearInterval(this.set2);
+    clearInterval(this.set3);
     window.removeEventListener('keyup', this.handleMainKeypress);
     window.removeEventListener('keyup', this.handleKeypress);
     window.removeEventListener('keyup', this.handleVolumepress);

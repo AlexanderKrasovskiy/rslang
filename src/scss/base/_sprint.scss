@@ -31,10 +31,12 @@
 }
 
 .level-sprint {
-    width: 550px;
+    width: 38rem;
+    max-width: 80vw;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 1rem;
 }
 
 .sprint-level-btn {
@@ -270,13 +272,15 @@
 
 .sprint_controll {
     position: absolute;
-    top: 85px;
-    right: 167px;
+    top: 5rem;
+    right: 3rem;
     z-index: 1;
     display: flex;
     width: fit-content;
     gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 0.2rem;
+    border-radius: 3px;
 }
 
 .sprint_cross {
@@ -339,8 +343,8 @@
     justify-content: space-between;
     align-items: center;
     left: 0;
-    top: 45px;
-    margin-left: 220px;
+    top: 25px;
+    margin-left: 10%;
 }
 
 .sprint_clock {
@@ -423,5 +427,69 @@
 @media (max-width: 1100px) {
     .sprint_time {
         margin-left: 40px;
+    }
+}
+
+@media (max-width: 601px) {
+    .sprint_game-content {
+        width: 100vw;
+    }
+    .level-sprint {
+        width: 98vw;
+    }
+    .img-sprint {
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+    }
+    .sprint_game-content {
+        height: fit-content;
+        padding-bottom: 2rem;
+    }
+    .sprint-all-wrap {
+        height: fit-content;
+    }
+    .sprint_over {
+        width: 98vw;
+    }
+    .sprint_header-result,
+    .sprint_header-learn,
+    .sprint_header-unlearn,
+    .sprint_list-words {
+        font-size: 1rem;
+    }
+    .sprint_btn-block-over {
+        padding: 10px 1%;
+    }
+    .title-sprint {
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+    }
+    .subtitle-sprint {
+        font-size: 1.5rem;
+    }
+    .sprint_word {
+        max-width: 480px;
+        width: 98vw;
+    }
+    .nav_list-sprint,
+    .nav-sprint {
+        font-size: 12px;
+    }
+    .sprint_controll {
+        top: 9rem;
+        right: 1rem;
+    }
+    .sprint_cross {
+        width: 1rem;
+        height: 1rem;
+    }
+    .sprint_fullscreen {
+        width: 1rem;
+        height: 1rem;
+    }
+    .sprint_sound {
+        width: 1.1rem;
+        height: 1.1rem;
     }
 }

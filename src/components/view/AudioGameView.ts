@@ -293,7 +293,7 @@ export class AudioGameView {
     const imgDiv = createElement('div', 'audio_img-word');
     volumeBtn.tabIndex = 0;
     let index = 0;
-    let widthLineRes = 600 / mixData.length;
+    let widthLineRes = 100 / mixData.length;
     imgDiv.style.backgroundImage = `url(${HOST}/${mixData[0].image})`;
     this.audio.src = `${HOST}/${mixData[index].audio}`;
     audioBlock.onclick = () => {
@@ -400,7 +400,9 @@ export class AudioGameView {
         if (el.key === 'Enter') {
           if (flag) {
             flag = false;
-            this.set3 = setTimeout(() => { window.addEventListener('keyup', this.handleMainKeypress);}, 0);
+            this.set3 = setTimeout(() => {
+              window.addEventListener('keyup', this.handleMainKeypress);
+            }, 0);
             this.pressMainButtonAnswer(
               mainBtn,
               data,
@@ -422,8 +424,8 @@ export class AudioGameView {
             }
           } else {
             index += 1;
-             innerLineRes.style.width = `${widthLineRes}px`
-             widthLineRes += 600 / mixData.length
+            innerLineRes.style.width = `${widthLineRes}%`;
+            widthLineRes += 100 / mixData.length;
             setTimeout(() => {
               window.addEventListener('keyup', this.handleKeypress);
               window.removeEventListener('keyup', this.handleMainKeypress);
@@ -478,8 +480,8 @@ export class AudioGameView {
           }
         } else {
           index += 1;
-          innerLineRes.style.width = `${widthLineRes}px`
-          widthLineRes += 600 / mixData.length
+          innerLineRes.style.width = `${widthLineRes}%`;
+          widthLineRes += 100 / mixData.length;
           this.addAnimation(contentGame, mixData, index);
           flag = true;
           flagRes = true;
@@ -525,7 +527,7 @@ export class AudioGameView {
             if (userWord && user) {
               this.countBestRes += 1;
               this.bestResult.push(this.countBestRes);
-             this.correctUserWord(userWord, user);
+              this.correctUserWord(userWord, user);
             }
             this.createCorrectResult(data, mixData[index].en);
             this.createSounds(this.sound, 'true');
@@ -561,7 +563,7 @@ export class AudioGameView {
       window.addEventListener('keyup', this.handleMainKeypress);
     }, 2300);
     window.addEventListener('keyup', this.handleVolumepress);
-    lineResult.append(innerLineRes)
+    lineResult.append(innerLineRes);
     wordName.appendChild(audioBlock);
     word.append(imgDiv);
     word.append(wordName);

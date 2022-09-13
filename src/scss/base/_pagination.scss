@@ -56,3 +56,12 @@
         }
     }
 }
+
+@media only screen and (max-width: 600px) {
+    .pagination-top {
+        margin-top: 1rem;
+    }
+    .pagination {
+        height: 200px;
+    }
+}

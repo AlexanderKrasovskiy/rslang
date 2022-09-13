@@ -1,67 +1,80 @@
 .lang_login {
-  display: flex;
-  align-items: center;
-  height: 100vh;
+    display: flex;
+    align-items: center;
+    height: 100vh;
 }
 
 .lang_login_img_container {
-  width: 45%;
-  height: 100%;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
+    width: 45%;
+    height: 100%;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .lang_login_img_container.lang_door {
-  background-image: url('../assets/icons/login-door.png');
+    background-image: url('../assets/icons/login-door.png');
 }
 
 .lang_login_img_container.lang_telephone {
-  background-image: url('../assets/icons/login-telephone.png');
+    background-image: url('../assets/icons/login-telephone.png');
 }
 
 .lang_login_img {
-  display: block;
+    display: block;
 }
 
 .lang_login_form_container {
-  width: 55%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .lang_login_heading {
-  background-color: #283d3b;
-  color: #ead3c6;
-  font-family: Georgia, serif;
-  text-shadow: 4px 2px black;
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-align: center;
-  line-height: 90%;
-  padding: 14px;
-  width: fit-content;
-  border: 15px double black;
-  border-radius: 5px;
-  margin-bottom: 3rem;
+    background-color: #283d3b;
+    color: #ead3c6;
+    font-family: Georgia, serif;
+    text-shadow: 4px 2px black;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height: 90%;
+    padding: 14px;
+    width: fit-content;
+    border: 15px double black;
+    border-radius: 5px;
+    margin-bottom: 3rem;
 }
 
 .lang_login_form {
-  margin: 0 auto;
-  max-width: 300px;
+    margin: 0 auto;
+    max-width: 300px;
 }
 
 .lang_login_input {
-  margin: 5px auto;
+    margin: 5px auto;
 }
 
 .lang_login_input_last {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .lang_login_btn {
-  display: block;
-  margin: 0 auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .lang_login {
+        height: fit-content;
+    }
+    .lang_login_img_container {
+        width: 0;
+    }
+    .lang_login_form_container {
+        width: 100%;
+        padding: 160px 0;
+    }
 }

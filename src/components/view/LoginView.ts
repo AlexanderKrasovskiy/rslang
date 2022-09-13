@@ -44,7 +44,7 @@ export class LoginView {
     const formData = new FormData(this.form);
 
     const mail = formData.get('mail')?.toString().trim();
-    const pass = formData.get('pass')?.toString().trim();
+    const pass = formData.get('pass');
 
     await this.handleSignIn?.(`${mail}`, `${pass}`);
   }
@@ -81,8 +81,8 @@ export class LoginView {
 
     const name = formData.get('name')?.toString().trim() || 'Аноним';
     const mail = formData.get('mail')?.toString().trim();
-    const pass1 = formData.get('pass_1')?.toString().trim();
-    const pass2 = formData.get('pass_2')?.toString().trim();
+    const pass1 = formData.get('pass_1');
+    const pass2 = formData.get('pass_2');
 
     if (pass1 !== pass2) {
       this.showToast('Пароли должны совпадать');

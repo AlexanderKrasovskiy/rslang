@@ -12,12 +12,14 @@ export const createParagraphWithLink = (route: string, simpleText: string, linkT
   return p;
 };
 
+const pattern = '^[a-zA-Z0-9]+(\\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,15})$';
+
 export const createLoginFormContent = () => {
   const row = createElement('div', 'row');
   row.innerHTML = `
   <div class="input-field col s12 lang_login_input">
     <i class="grey-text text-darken-1 material-icons prefix">mail</i>
-    <input id="mail" type="email" class="validate" name="mail" required>
+    <input id="mail" type="email" class="validate" name="mail" required pattern="${pattern}">
     <label for="mail">e-mail *</label>
   </div>
 
@@ -46,7 +48,7 @@ export const createRegistryFormContent = () => {
 
   <div class="input-field col s12 lang_login_input">
     <i class="grey-text text-darken-1 material-icons prefix">mail</i>
-    <input id="mail_2" type="email" class="validate" name="mail" required>
+    <input id="mail_2" type="email" class="validate" name="mail" required pattern="${pattern}">
     <label for="mail_2">e-mail *</label>
   </div>
 

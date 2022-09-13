@@ -26,6 +26,11 @@ export class AudioGameView {
   set1?: NodeJS.Timer;
   set2?: NodeJS.Timer;
   set3?: NodeJS.Timer;
+  set4?: NodeJS.Timer;
+  set5?: NodeJS.Timer;
+  set6?: NodeJS.Timer;
+  set7?: NodeJS.Timer;
+  set8?: NodeJS.Timer;
   handleVolumepress: (el: KeyboardEvent) => void;
   handleKeypress: (el: KeyboardEvent) => void;
   handleMainKeypress: (el: KeyboardEvent) => void;
@@ -53,6 +58,11 @@ export class AudioGameView {
     this.set1 = setTimeout(() => {});
     this.set2 = setTimeout(() => {});
     this.set3 = setTimeout(() => {});
+    this.set4 = setTimeout(() => {});
+    this.set5 = setTimeout(() => {});
+    this.set6 = setTimeout(() => {});
+    this.set7 = setTimeout(() => {});
+    this.set8 = setTimeout(() => {});
   }
 
   public render(data?: WordPlusUserWord[], user?: LoginData): void {
@@ -184,13 +194,13 @@ export class AudioGameView {
     ];
 
     for (let i = 0; i <= 5; i += 1) {
-      const btnLevel = createElement(
-        'button',
-        `audio-level-btn z-depth-2 waves-effect ${classArr[i]}`,
-        `${levelArr[i]}`,
+      const btnLevel = <HTMLButtonElement>(
+        createElement('button', `audio-level-btn z-depth-2 waves-effect ${classArr[i]}`, `${levelArr[i]}`)
       );
+      btnLevel.disabled = false;
       btnLevel.tabIndex = 0;
       btnLevel.onclick = async () => {
+        btnLevel.disabled = true;
         const randomPage = Math.floor(Math.random() * 29);
         const words = await getWords(randomPage, i);
         this.stateGame.innerHTML = '';
@@ -246,14 +256,15 @@ export class AudioGameView {
       ' - пробел для повторного звучания слова',
     );
 
-    const btnStart = createElement('button', `audio_start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
+    const btnStart = <HTMLButtonElement>createElement('button', `audio_start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
     btnStart.tabIndex = 0;
 
     const data1 = data.filter(
       (item) => !(<Optional>item.optional) || (<Optional>item.optional && <Optional>item.optional).learned === 'no',
     );
-
+    btnStart.disabled = false;
     btnStart.onclick = () => {
+      btnStart.disabled = true;
       this.stateGame.innerHTML = '';
       if (!data1.length) window.location.hash = 'book';
       if (data1.length && user) this.showGame(data1, user);
@@ -309,15 +320,16 @@ export class AudioGameView {
     wordName.innerHTML = `${mixData[index].en}  ${mixData[index].tr}`;
     let flag = true;
     let flagRes = true;
-    const blockWodsArr: HTMLButtonElement[] = [];
-    const keyCode = ['1', '2', '3', '4', '5'];
+    const blockWordsArr: HTMLButtonElement[] = [];
+    let keyCode: string[] = ['1', '2', '3', '4', '5'];
+    if (mixData.length < 5) keyCode = keyCode.slice(0, mixData.length);
 
     for (let i = 0; i < mixData[index].ruRandom.length; i += 1) {
       const wordContainer = <HTMLButtonElement>(
         createElement('button', `audio_block-word z-depth-1 waves-effect`, `${i + 1} ${mixData[index].ruRandom[i]}`)
       );
       wordContainer.id = `${i + 1}`;
-      blockWodsArr.push(wordContainer);
+      blockWordsArr.push(wordContainer);
       blockBtn.append(wordContainer);
     }
 
@@ -332,7 +344,9 @@ export class AudioGameView {
       if (index <= mixData.length) {
         keyCode.forEach((key) => {
           if (el.key === key) {
-            blockWodsArr.forEach((v) => {
+            console.log();
+
+            blockWordsArr.forEach((v) => {
               if (v.textContent?.split(' ').slice(1).join(' ') === mixData[index].ru) v.classList.add('correct');
               const text = v.textContent?.split(' ').slice(1).join(' ');
               if (flagRes) {
@@ -368,7 +382,7 @@ export class AudioGameView {
               this.set1 = setTimeout(() => {
                 window.addEventListener('keyup', this.handleMainKeypress);
               }, 800);
-              setTimeout(() => {
+              this.set2 = setTimeout(() => {
                 window.addEventListener('keyup', this.handleKeypress);
               }, 3000);
               mainBtn.innerText = 'ДАЛЬШЕ';
@@ -382,7 +396,7 @@ export class AudioGameView {
                 this.endGame();
                 index = 0;
               }
-              blockWodsArr.forEach((w) => {
+              blockWordsArr.forEach((w) => {
                 const btnActiv = w;
                 btnActiv.disabled = true;
               });
@@ -413,7 +427,7 @@ export class AudioGameView {
               wordName,
               audioBlock,
               word,
-              blockWodsArr,
+              blockWordsArr,
             );
             const userWord = this.findWord(data, mixData[index].en);
             if (userWord && user) {
@@ -426,7 +440,7 @@ export class AudioGameView {
             index += 1;
             innerLineRes.style.width = `${widthLineRes}%`;
             widthLineRes += 100 / mixData.length;
-            setTimeout(() => {
+            this.set4 = setTimeout(() => {
               window.addEventListener('keyup', this.handleKeypress);
               window.removeEventListener('keyup', this.handleMainKeypress);
             }, 2000);
@@ -435,7 +449,7 @@ export class AudioGameView {
             flagRes = true;
             mainBtn.disabled = true;
             setTimeout(() => {
-              this.pressMainButtonNext(mainBtn, index, mixData, mainBlock, blockWodsArr, volumeBtn, this.audio);
+              this.pressMainButtonNext(mainBtn, index, mixData, mainBlock, blockWordsArr, volumeBtn, this.audio);
               mainBtn.disabled = false;
             }, 800);
           }
@@ -468,7 +482,7 @@ export class AudioGameView {
             wordName,
             audioBlock,
             word,
-            blockWodsArr,
+            blockWordsArr,
           );
           window.removeEventListener('keyup', this.handleKeypress);
           const userWord = this.findWord(data, mixData[index].en);
@@ -486,9 +500,9 @@ export class AudioGameView {
           flag = true;
           flagRes = true;
           mainBtn.disabled = true;
-          setTimeout(() => {
+          this.set5 = setTimeout(() => {
             window.addEventListener('keyup', this.handleKeypress);
-            this.pressMainButtonNext(mainBtn, index, mixData, mainBlock, blockWodsArr, volumeBtn, this.audio);
+            this.pressMainButtonNext(mainBtn, index, mixData, mainBlock, blockWordsArr, volumeBtn, this.audio);
             mainBtn.disabled = false;
           }, 800);
         }
@@ -502,10 +516,10 @@ export class AudioGameView {
       }
     };
 
-    blockWodsArr.forEach((el) => {
+    blockWordsArr.forEach((el) => {
       const btn = el;
       btn.onclick = () => {
-        blockWodsArr.forEach((v) => {
+        blockWordsArr.forEach((v) => {
           const click = v;
           if (click.textContent?.split(' ').slice(1).join(' ') === mixData[index].ru) v.classList.add('correct');
           click.disabled = true;
@@ -559,7 +573,7 @@ export class AudioGameView {
     };
 
     window.addEventListener('keyup', this.handleKeypress);
-    setTimeout(() => {
+    this.set6 = setTimeout(() => {
       window.addEventListener('keyup', this.handleMainKeypress);
     }, 2300);
     window.addEventListener('keyup', this.handleVolumepress);
@@ -592,16 +606,16 @@ export class AudioGameView {
     setTimeout(() => {
       contentGame.classList.add('stop');
     }, 1000);
-    const imt1 = setTimeout(() => {
+    this.set7 = setTimeout(() => {
       window.addEventListener('keyup', this.handleKeypress);
     }, 2000);
-    this.set2 = setTimeout(() => {
+    this.set8 = setTimeout(() => {
       window.addEventListener('keyup', this.handleMainKeypress);
     }, 2200);
 
     if (index === mixData.length) {
-      clearInterval(this.set2);
-      clearInterval(imt1);
+      clearInterval(this.set7);
+      clearInterval(this.set8);
       window.removeEventListener('keyup', this.handleMainKeypress);
       window.removeEventListener('keyup', this.handleMainKeypress);
     }
@@ -895,6 +909,11 @@ export class AudioGameView {
     clearInterval(this.set1);
     clearInterval(this.set2);
     clearInterval(this.set3);
+    clearInterval(this.set4);
+    clearInterval(this.set5);
+    clearInterval(this.set6);
+    clearInterval(this.set7);
+    clearInterval(this.set8);
     window.removeEventListener('keyup', this.handleMainKeypress);
     window.removeEventListener('keyup', this.handleKeypress);
     window.removeEventListener('keyup', this.handleVolumepress);

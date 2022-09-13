@@ -154,7 +154,7 @@ export class SprintGameView {
 
     const levelBlock: HTMLElement = createElement('div', 'level-sprint');
 
-    while (randomPageArr.length < 15) {
+    while (randomPageArr.length < 30) {
       const randomPage = Math.floor(Math.random() * 29);
       if (!randomPageArr.includes(randomPage)) {
         randomPageArr.push(randomPage);
@@ -173,13 +173,14 @@ export class SprintGameView {
     ];
 
     for (let i = 0; i <= 5; i += 1) {
-      const btnLevel = createElement(
+      const btnLevel = <HTMLButtonElement>createElement(
         'button',
         `sprint-level-btn z-depth-2 waves-effect ${classArr[i]}`,
         `${levelArr[i]}`,
       );
-
+      btnLevel.disabled = false  
       btnLevel.onclick = async () => {
+        btnLevel.disabled = true
         const words = await getRandomWords(randomPageArr, i);
         this.stateGame.innerHTML = '';
         this.stateGame.innerHTML = '';
@@ -223,14 +224,16 @@ export class SprintGameView {
       ' - клавиши влево и вправо для выбора ответа',
     );
 
-    const btnStart = createElement('button', `sprint-start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
+    const btnStart = <HTMLButtonElement>createElement('button', `sprint-start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
     btnStart.tabIndex = 0;
 
     const data1 = data.filter(
       (item) => !(<Optional>item.optional) || (<Optional>item.optional && <Optional>item.optional).learned === 'no',
     );
 
+    btnStart.disabled = false
     btnStart.onclick = () => {
+      btnStart.disabled = true
       this.stateGame.innerHTML = '';
       if (!data1.length) window.location.hash = 'book';
       if (data1.length && user) this.showGame(data1, user);

@@ -143,13 +143,15 @@ export class PhraseGameView {
     ];
 
     for (let i = 0; i <= 5; i += 1) {
-      const btnLevel = createElement(
+      const btnLevel = <HTMLButtonElement>createElement(
         'button',
         `phrase-level-btn z-depth-2 waves-effect ${classArr[i]}`,
         `${levelArr[i]}`,
       );
+      btnLevel.disabled = false
       btnLevel.tabIndex = 0;
       btnLevel.onclick = async () => {
+        btnLevel.disabled = true
         const randomPage = Math.floor(Math.random() * 29);
         const words = await getWordsFromBook(randomPage, i);
         this.stateGame.innerHTML = '';
@@ -184,14 +186,16 @@ export class PhraseGameView {
       'Соедини слова и фразы в правильном порядке',
     );
 
-    const btnStart = createElement('button', `phrase_start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
+    const btnStart = <HTMLButtonElement>createElement('button', `phrase_start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
     btnStart.tabIndex = 0;
 
     const data1 = data.filter(
       (item) => !(<Optional>item.optional) || (<Optional>item.optional && <Optional>item.optional).learned === 'no',
     );
 
+    btnStart.disabled = false
     btnStart.onclick = () => {
+      btnStart.disabled = true
       this.stateGame.innerHTML = '';
       if (user) this.showGame(data1, user);
       else this.showGame(data1);

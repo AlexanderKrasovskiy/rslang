@@ -131,6 +131,7 @@
   text-align: center;
   top: 280px;
   color: azure;
+  margin: 20px;
   background: rgba(0, 0, 0, 0.7);
   line-height: 40px;
   padding: 35px 20px;
@@ -143,6 +144,9 @@
 @media only screen and (max-width: 600px) {
   #index-banner-stat .section {
     top: 41%;
+  }
+  .stat_modal_title {
+    font-size: 20px;
   }
   .top-img-stat {
     min-height: 210px;

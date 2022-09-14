@@ -155,7 +155,7 @@ export class SprintGameView {
     const levelBlock: HTMLElement = createElement('div', 'level-sprint');
 
     while (randomPageArr.length < 30) {
-      const randomPage = Math.floor(Math.random() * 29);
+      const randomPage = Math.floor(Math.random() * 30);
       if (!randomPageArr.includes(randomPage)) {
         randomPageArr.push(randomPage);
       }
@@ -173,14 +173,12 @@ export class SprintGameView {
     ];
 
     for (let i = 0; i <= 5; i += 1) {
-      const btnLevel = <HTMLButtonElement>createElement(
-        'button',
-        `sprint-level-btn z-depth-2 waves-effect ${classArr[i]}`,
-        `${levelArr[i]}`,
+      const btnLevel = <HTMLButtonElement>(
+        createElement('button', `sprint-level-btn z-depth-2 waves-effect ${classArr[i]}`, `${levelArr[i]}`)
       );
-      btnLevel.disabled = false  
+      btnLevel.disabled = false;
       btnLevel.onclick = async () => {
-        btnLevel.disabled = true
+        btnLevel.disabled = true;
         const words = await getRandomWords(randomPageArr, i);
         this.stateGame.innerHTML = '';
         this.stateGame.innerHTML = '';
@@ -231,9 +229,9 @@ export class SprintGameView {
       (item) => !(<Optional>item.optional) || (<Optional>item.optional && <Optional>item.optional).learned === 'no',
     );
 
-    btnStart.disabled = false
+    btnStart.disabled = false;
     btnStart.onclick = () => {
-      btnStart.disabled = true
+      btnStart.disabled = true;
       this.stateGame.innerHTML = '';
       if (!data1.length) window.location.hash = 'book';
       if (data1.length && user) this.showGame(data1, user);
@@ -593,11 +591,7 @@ export class SprintGameView {
     const learnedWords = [...new Set(arrStr1)].map((e) => JSON.parse(e));
     const arrStr2 = this.unlearnedWords.map((a) => JSON.stringify(a));
     const unlearnedWords = [...new Set(arrStr2)].map((e) => JSON.parse(e));
-    const headerListLerned = createElement(
-      'div',
-      'sprint_header-learn',
-      `Угаданные слова - ${learnedWords.length}`,
-    );
+    const headerListLerned = createElement('div', 'sprint_header-learn', `Угаданные слова - ${learnedWords.length}`);
     const headerListUnlerned = createElement(
       'div',
       'sprint_header-unlearn',

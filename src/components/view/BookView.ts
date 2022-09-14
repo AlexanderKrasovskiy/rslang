@@ -52,8 +52,8 @@ export class BookView {
     const bookWrap = createElement('div', 'book-wrap', '', 'book-wrap');
     this.mainDiv.appendChild(bookWrap);
     const title = createElement('div', 'parallax-container valign-wrapper title-lang');
-    title.innerHTML = `    <div class="section no-pad-bot">
-    <div class="container">
+    title.innerHTML = `    <div class="section no-pad-bot title-lang-mobile">
+      <div class="container">
         <h6 class="header center white-text h6-lang">Учебник. Multilevel coursebook</h6>
       </div>
     </div>
@@ -314,6 +314,9 @@ export class BookView {
       card.onDifficult = async () => {
         await statsModel.handleOnDifficult(res[i]);
         if (!res[i].difficulty) {
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
+
           res[i].difficulty = 'difficult';
           res[i].optional = {
             learned: 'no',
@@ -330,21 +333,21 @@ export class BookView {
             optional: res[i].optional,
           });
 
-          card.difficult.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
-          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
-
           this.learnAndDifficult += 1;
           if (this.learnAndDifficult >= WORD_ON_PAGE) this.changePageStyle('learned');
         } else if (res[i].difficulty && res[i].difficulty === 'difficult') {
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
+
           res[i].difficulty = 'normal';
           (<Optional>res[i].optional).learned = 'no';
           (<Optional>res[i].optional).learnDate = Date.now();
 
           await this.makeWordNormal(res[i], <LoginData>user);
-
-          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
         } else if (res[i].difficulty && res[i].difficulty !== 'difficult') {
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
+
           if (res[i].difficulty === 'normal') {
             this.learnAndDifficult += 1;
             if (this.learnAndDifficult >= WORD_ON_PAGE) this.changePageStyle('learned');
@@ -357,15 +360,15 @@ export class BookView {
             difficulty: res[i].difficulty as string,
             optional: res[i].optional,
           });
-
-          card.difficult.style.backgroundImage = `url(./assets/svg/difficult-colored.svg)`;
-          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
         }
       };
 
       card.onLearn = async () => {
         await statsModel.handleOnLearn(res[i]);
         if (!res[i].optional) {
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
+
           res[i].difficulty = 'easy';
           res[i].optional = {
             learned: 'yes',
@@ -381,22 +384,21 @@ export class BookView {
             difficulty: res[i].difficulty as string,
             optional: res[i].optional,
           });
-
-          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
-
           this.learnAndDifficult += 1;
           if (this.learnAndDifficult >= WORD_ON_PAGE) this.changePageStyle('learned');
         } else if (res[i].optional && res[i].optional?.learned === 'yes') {
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
+
           res[i].difficulty = 'normal';
           (<Optional>res[i].optional).learned = 'no';
           (<Optional>res[i].optional).learnDate = Date.now();
 
           await this.makeWordNormal(res[i], <LoginData>user);
-
-          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(./assets/svg/learn.svg)`;
         } else if (res[i].optional && res[i].optional?.learned === 'no') {
+          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
+          card.learn.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
+
           if (res[i].difficulty === 'normal') {
             this.learnAndDifficult += 1;
             if (this.learnAndDifficult >= WORD_ON_PAGE) this.changePageStyle('learned');
@@ -409,9 +411,6 @@ export class BookView {
             difficulty: res[i].difficulty as string,
             optional: res[i].optional,
           });
-
-          card.difficult.style.backgroundImage = `url(./assets/svg/difficult.svg)`;
-          card.learn.style.backgroundImage = `url(./assets/svg/learn-colored.svg)`;
         }
       };
 

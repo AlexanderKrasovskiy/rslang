@@ -335,8 +335,8 @@ export class SprintGameView {
 
     window.addEventListener('keyup', this.handleKeypress);
 
-    btnRight.onclick = () => {
-      this.rightChoice(
+    btnRight.onclick = async () => {
+      await this.rightChoice(
         index,
         mixData,
         data,
@@ -353,8 +353,8 @@ export class SprintGameView {
       index += 1;
     };
 
-    btnWrong.onclick = () => {
-      this.wrongChoice(
+    btnWrong.onclick = async () => {
+      await this.wrongChoice(
         index,
         mixData,
         data,
@@ -388,7 +388,7 @@ export class SprintGameView {
     return this.stateGame;
   }
 
-  rightChoice(
+  async rightChoice(
     index: number,
     mixData: MixWordsSprint[],
     data: WordPlusUserWord[],
@@ -409,7 +409,7 @@ export class SprintGameView {
 
     if (index < mixData.length) {
       const userWord = this.findWord(data, mixData[index].en);
-      if (userWord && user) this.createNewUserWord(userWord, user);
+      if (userWord && user) await this.createNewUserWord(userWord, user);
       if (!mixData[index].match) {
         if (userWord && user) {
           this.bestResult.push(this.countBestRes);
@@ -446,7 +446,7 @@ export class SprintGameView {
     wordName.appendChild(audioBlock);
   }
 
-  wrongChoice(
+  async wrongChoice(
     index: number,
     mixData: MixWordsSprint[],
     data: WordPlusUserWord[],
@@ -467,7 +467,7 @@ export class SprintGameView {
 
     if (index < mixData.length) {
       const userWord = this.findWord(data, mixData[index].en);
-      if (userWord && user) this.createNewUserWord(userWord, user);
+      if (userWord && user) await this.createNewUserWord(userWord, user);
       if (!mixData[index].match) {
         if (userWord && user) {
           this.countBestRes += 1;

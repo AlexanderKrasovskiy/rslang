@@ -43,7 +43,7 @@ export class LoginView {
     e.preventDefault();
     const formData = new FormData(this.form);
 
-    const mail = formData.get('mail');
+    const mail = formData.get('mail')?.toString().trim();
     const pass = formData.get('pass');
 
     await this.handleSignIn?.(`${mail}`, `${pass}`);
@@ -79,8 +79,8 @@ export class LoginView {
     e.preventDefault();
     const formData = new FormData(this.form);
 
-    const name = formData.get('name') || 'Аноним';
-    const mail = formData.get('mail');
+    const name = formData.get('name')?.toString().trim() || 'Аноним';
+    const mail = formData.get('mail')?.toString().trim();
     const pass1 = formData.get('pass_1');
     const pass2 = formData.get('pass_2');
 

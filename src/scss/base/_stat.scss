@@ -1,132 +1,159 @@
 .center-img-stat,
 .top-img-stat {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: flex-end;
 }
 
 .top-img-stat {
-    min-height: 170px;
+  min-height: 170px;
 }
 
 .section-stat {
-    padding-top: 2rem;
+  padding-top: 2rem;
 }
 
 .stat-day-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
 }
 
 .stat-day {
-    width: 100%;
-    min-height: 68vh;
-    max-width: 900px;
-    border: 1px solid rgb(153, 153, 153);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 1rem;
+  width: 100%;
+  min-height: 68vh;
+  max-width: 900px;
+  border: 1px solid rgb(153, 153, 153);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 1rem;
 }
 
 .stat_card {
-    flex-basis: calc(50% - 5px);
-    border: 1px solid rgb(153, 153, 153);
-    border-radius: 5px;
-    padding: 10px;
+  flex-basis: calc(50% - 5px);
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .stat_card_total {
-    border: 1px solid rgb(0, 0, 0);
-    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14), 0 2px 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14), 0 2px 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px -2px rgba(0, 0, 0, 0.2);
 }
 
 .stat_card_heading {
-    display: flex;
-    align-items: center;
-    height: 70px;
+  display: flex;
+  align-items: center;
+  height: 70px;
 }
 
 .stat_card_img {
-    flex-basis: 30%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    border-bottom: 5px double darkgray;
+  flex-basis: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 5px double darkgray;
 }
 
 .stat_card_title {
-    flex-basis: 65%;
+  flex-basis: 65%;
 }
 
 .stat_btn-total {
-    background-image: url(../assets/svg/stat_total.svg);
+  background-image: url(../assets/svg/stat_total.svg);
 }
 
 .stat_card_title {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .stats_list {
-    height: calc(100% - 70px);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 20px;
-    font-size: 20px;
+  height: calc(100% - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
 }
 
 .stat_text_container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .stat_num {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .stats_charts_container {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .stat_long_heading {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .stats_chart {
-    width: 100%;
-    height: 250px;
+  width: 100%;
+  height: 250px;
 }
 
 .scroll-stat {
-    position: fixed;
-    top: 50vh;
-    right: 0;
-    width: 14%;
-    padding: 0 1rem;
-    background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  top: 50vh;
+  right: 0;
+  width: 14%;
+  padding: 0 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.stat_modal {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.stat_modal_title {
+  position: fixed;
+  font-size: 35px;
+  text-align: center;
+  top: 280px;
+  color: azure;
+  background: rgba(0, 0, 0, 0.7);
+  line-height: 40px;
+  padding: 35px 20px;
+}
+
+.stat_card_img > .game-picture {
+  z-index: 1;
 }
 
 @media only screen and (max-width: 600px) {
-    #index-banner-stat .section {
-        top: 41%;
-    }
-    .top-img-stat {
-        min-height: 210px;
-    }
-    .scroll-stat {
-        display: none;
-    }
-    .stat_card {
-        flex-basis: calc(100% - 5px);
-    }
-    .stats_list {
-        font-size: 1.2rem;
-    }
+  #index-banner-stat .section {
+    top: 41%;
+  }
+  .top-img-stat {
+    min-height: 210px;
+  }
+  .scroll-stat {
+    display: none;
+  }
+  .stat_card {
+    flex-basis: calc(100% - 5px);
+  }
+  .stats_list {
+    font-size: 1.2rem;
+  }
 }

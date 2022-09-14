@@ -18,13 +18,14 @@ export class StatsController {
     if (isLogged) {
       stats = await this.model.getStats();
       this.handleEmptyStats(stats);
+      this.view.render(stats);
     } else {
       stats = this.model.getDefaultStats();
       const msg = 'Нет данных - нужно Войти ;)';
       M.toast({ html: msg });
+      this.view.render(stats);
+      this.view.showNeedToRegisterModal();
     }
-
-    this.view.render(stats);
   }
 
   private handleEmptyStats(stats: Stats) {

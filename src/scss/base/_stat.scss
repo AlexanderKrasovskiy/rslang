@@ -139,3 +139,21 @@
 .stat_card_img > .game-picture {
   z-index: 1;
 }
+
+@media only screen and (max-width: 600px) {
+  #index-banner-stat .section {
+    top: 41%;
+  }
+  .top-img-stat {
+    min-height: 210px;
+  }
+  .scroll-stat {
+    display: none;
+  }
+  .stat_card {
+    flex-basis: calc(100% - 5px);
+  }
+  .stats_list {
+    font-size: 1.2rem;
+  }
+}

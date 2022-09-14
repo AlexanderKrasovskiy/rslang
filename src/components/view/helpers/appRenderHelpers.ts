@@ -1,6 +1,6 @@
 import { Route } from '../../types/appRoutes';
 
-export const renderHeader = () => `<div class = "header-lang">
+export const renderHeader = () => `
 <ul id="dropdown1" class="dropdown-content">
 <li><a href="#${Route.sprint}">Спринт</a></li>
 <li class="divider"></li>
@@ -8,15 +8,17 @@ export const renderHeader = () => `<div class = "header-lang">
 <li class="divider"></li>
 <li><a href="#${Route.phrase}">Фразы</a></li>
 </ul>
+
+<div class = "header-lang">
 <nav class = "nav-lang">
 <div class="nav-wrapper">
-  <a href="#${Route.main}" class="brand-logo logo-lang hide-on-med-and-down"></a>
+  <a href="#${Route.main}" class="logo-lang hide-on-med-and-down"></a>
   <ul class="right">
-    <li><a href="#${Route.main}">На главную</a></li>
-    <li><a href="#${Route.book}#0#0">Учебник</a></li>
-    <li><a href="#${Route.stats}">Статистика</a></li>
-    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Игры<i class="material-icons right">arrow_drop_down</i></a></li>
-    <li><a href="#${Route.login}" id="lang_login_btn">Вход</a></li>
+    <li><a href="#${Route.main}" class = "menu-link-lang">На главную</a></li>
+    <li><a href="#${Route.book}#0#0" class = "menu-link-lang">Учебник</a></li>
+    <li><a href="#${Route.stats}" class = "menu-link-lang">Статистика</a></li>
+    <li><a class="dropdown-trigger menu-link-lang" href="#!" data-target="dropdown1">Игры<i class="material-icons right">arrow_drop_down</i></a></li>
+    <li><a href="#${Route.login}" id="lang_login_btn" class = "menu-link-lang">Вход</a></li>
   </ul>
 </div>
 </nav>

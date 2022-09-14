@@ -106,11 +106,6 @@
     }
 }
 
-.main-btn {
-    width: 5rem;
-    height: 5rem;
-}
-
 .non-acceptable .games-btn {
     background-color: rgba(0, 0, 0, 0.14);
 }
@@ -174,4 +169,30 @@
 .no-difficult-card {
     font-size: 2rem;
     font-weight: 600;
+}
+
+@media only screen and (max-width: 994px) {
+    .learned-message {
+        top: 15px;
+        left: 5%;
+        scale: 0.6;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .parallax-container .section {
+        top: 55%;
+    }
+    .title-lang {
+        min-height: 170px;
+    }
+    .levels {
+        position: static;
+    }
+    .cards {
+        padding: 1.2rem 0 1rem 0;
+    }
+    .learned-message {
+        top: 65px;
+    }
 }

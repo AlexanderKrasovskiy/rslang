@@ -66,22 +66,6 @@ p {
     }
 }
 
-@media only screen and (max-width: 992px) {
-    .parallax-container .section {
-        position: absolute;
-        top: 40%;
-    }
-    #index-banner .section {
-        top: 10%;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    #index-banner .section {
-        top: 0;
-    }
-}
-
 .icon-block {
     padding: 0 15px;
 }
@@ -179,15 +163,12 @@ footer.page-footer {
 .about-app-games {
     display: flex;
     flex-direction: column;
-    padding: 1rem 1rem 2rem 3rem;
 }
 
-.about-app-book {
-    width: 49%;
-}
-
+.about-app-book,
 .about-app-stat {
     width: 49%;
+    padding: 1rem 1rem 2rem 3rem;
 }
 
 .about-app-games {
@@ -196,6 +177,11 @@ footer.page-footer {
     align-items: center;
     gap: 0.7rem;
     padding-top: 1.8rem;
+    padding: 1rem 1rem 2rem 1rem;
+}
+
+.about-app-games-list {
+    padding-left: 2rem;
 }
 
 .about-app-title-btn {
@@ -244,4 +230,70 @@ footer.page-footer {
 .lang_team_tags {
     display: flex;
     justify-content: center;
+}
+
+.main-btn {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.14), 0 2px 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+    }
+    .game-title {
+        color: black;
+        text-align: center;
+        font-size: 0.8rem;
+        padding-bottom: 0.3rem;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+    #index-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .main-btn {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #index-banner .section {
+        top: 30%;
+    }
+    .h5-main-mobile {
+        position: absolute;
+        bottom: 5%;
+    }
+    .about-app-wrap__small {
+        flex-direction: column;
+    }
+    .about-app-book,
+    .about-app-stat {
+        width: 98%;
+    }
+    .main-btn {
+        width: 3rem;
+        height: 3rem;
+    }
+    .about-app-title-btn {
+        gap: 0.5rem;
+    }
+    .main-games {
+        gap: 0.7rem;
+    }
 }

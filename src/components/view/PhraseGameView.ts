@@ -126,7 +126,7 @@ export class PhraseGameView {
     const title: HTMLElement = createElement('h1', 'title-phrase h1-lang', 'Фразы');
     const subTitle: HTMLElement = createElement(
       'h5',
-      'subtitle-phrase h5-lang',
+      'subtitle-phrase h5-lang center',
       'Соедини слова и фразы в правильном порядке',
     );
     const levelBlock: HTMLElement = createElement('div', 'level-phrase');
@@ -143,13 +143,15 @@ export class PhraseGameView {
     ];
 
     for (let i = 0; i <= 5; i += 1) {
-      const btnLevel = createElement(
+      const btnLevel = <HTMLButtonElement>createElement(
         'button',
         `phrase-level-btn z-depth-2 waves-effect ${classArr[i]}`,
         `${levelArr[i]}`,
       );
+      btnLevel.disabled = false
       btnLevel.tabIndex = 0;
       btnLevel.onclick = async () => {
+        btnLevel.disabled = true
         const randomPage = Math.floor(Math.random() * 29);
         const words = await getWordsFromBook(randomPage, i);
         this.stateGame.innerHTML = '';
@@ -184,14 +186,16 @@ export class PhraseGameView {
       'Соедини слова и фразы в правильном порядке',
     );
 
-    const btnStart = createElement('button', `phrase_start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
+    const btnStart = <HTMLButtonElement>createElement('button', `phrase_start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
     btnStart.tabIndex = 0;
 
     const data1 = data.filter(
       (item) => !(<Optional>item.optional) || (<Optional>item.optional && <Optional>item.optional).learned === 'no',
     );
 
+    btnStart.disabled = false
     btnStart.onclick = () => {
+      btnStart.disabled = true
       this.stateGame.innerHTML = '';
       if (user) this.showGame(data1, user);
       else this.showGame(data1);
@@ -223,7 +227,7 @@ export class PhraseGameView {
 
     const mixDataPhrase = getMixWordsForPhrase(data);
 
-    const phraseTitle = createElement('h5', 'h5-lang phrase-all-title', 'Перетяни слова в правильные фразы');
+    const phraseTitle = createElement('h5', 'h5-lang phrase-all-title center', 'Перетяни слова в правильные фразы');
     this.stateGame.appendChild(phraseTitle);
 
     const content = createElement('div', 'phrase-all-wrap');
@@ -306,8 +310,8 @@ export class PhraseGameView {
     const gameOver = <HTMLAudioElement>new Audio('./assets/audio/over.mp3');
     const learnWords = createElement('ul', 'phrase_list-words');
     const unlearnWords = createElement('ul', 'phrase_list-words');
-    const headerBlock = createElement('div', 'sprint_header-result');
-    const allWords = createElement('ul', 'sprint_all-words');
+    const headerBlock = createElement('div', 'phrase_header-result');
+    const allWords = createElement('ul', 'phrase_all-words');
     const headerListLerned = createElement('div', 'phrase_header-learn', `Угаданные слова - ${rightDataPhrase.length}`);
     const headerListUnlerned = createElement(
       'div',
@@ -318,7 +322,7 @@ export class PhraseGameView {
     unlearnWords.append(headerListUnlerned);
     showTotalRes.innerHTML = `Набрано ${rightDataPhrase.length * 10} очков`;
     showExperience.innerHTML = `Получено +10 опыта`;
-    const blockBtn = createElement('div', 'sprint_btn-block-over');
+    const blockBtn = createElement('div', 'phrase_btn-block-over');
     const endGame = createElement('button', 'waves-effect waves-light btn left-sptint-btn end', 'перейти в учебник');
     gameOver.pause();
     endGame.tabIndex = 0;

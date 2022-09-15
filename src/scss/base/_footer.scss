@@ -1,43 +1,51 @@
 .footer {
-  background-color: none;
-  height: 4rem;
-}
-
-.footer {
-  height: 4rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  z-index: 100;
-  width: 100%;
-  padding: 0.5rem 0;
-  color: white;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 0.5rem 0;
+    color: white;
 }
 
 .page-footer__logo {
-  width: 6rem;
-  height: 3rem;
-  background-image: url(../assets/svg/rs_school_js.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  fill: white;
+    width: 6rem;
+    height: 3rem;
+    background-image: url(../assets/svg/rs_school_js.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    fill: white;
 }
 
 .page-footer__github-wrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-direction: row;
-  padding-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: row;
+    padding-top: 0.5rem;
+    font-size: 1rem;
 }
 
 .page-footer__github {
-  width: 2rem;
-  height: 2rem;
-  background-image: url(../assets/svg/github-icon.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+    background-image: url(../assets/svg/github-icon.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 601px) {
+    .page-footer__github-wrap {
+        justify-content: center;
+        gap: 1rem;
+        font-size: 0.7rem;
+    }
+    .page-footer__logo {
+        width: 4rem;
+        height: 2rem;
+    }
 }

@@ -68,11 +68,13 @@ export class MainView {
         <div class="about-app-title-btn">
           <div class="about-app-title about-app-title_games">Игры</div>
         </div>
-          <ul class="">
+         <div class="about-app-games-list"> 
+          <ul>
             <li class="grey-text text-darken-2 list-lang"> Спринт - поможет запомнить слова, научит мгновенно переводить</li>
             <li class="grey-text text-darken-2 list-lang"> Аудиовызов - разовьет твои навыки аудирования</li>
             <li class="grey-text text-darken-2 list-lang"> Фразы - научит использовать слова в контексте предложения</li>
           </ul>
+         </div> 
         <div id = "games" class = "main-games"></div>
        </div>
 
@@ -159,19 +161,17 @@ export class MainView {
   </div>
 
   <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header light h5-lang">Твой друг в мире английского языка</h5>
-        </div>
-      </div>
-    </div>
+     <div class="container">
+       <div class="row center">
+          <h5 class="header light h5-lang center">Твой друг в мире английского языка</h5>
+       </div>
+      </div>   
     <div class="parallax"><img src="assets/images/castle.jpg" alt="castle" class = "img-parallax"></div>
   </div>`;
 
     const games = document.getElementById('games') as HTMLElement;
 
-    const game0 = createElement('a', 'games-btn main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
+    const game0 = createElement('a', 'main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
     game0.href = `#sprint`;
     games.appendChild(game0);
     const game0Title = createElement('div', 'game-title', ' ');
@@ -179,7 +179,7 @@ export class MainView {
     const game0Picture = createElement('div', 'game-picture btn-sprint');
     game0.appendChild(game0Picture);
 
-    const game1 = createElement('a', 'games-btn main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
+    const game1 = createElement('a', 'main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
     game1.href = `#audio`;
     games.appendChild(game1);
     const game1Title = createElement('div', 'game-title', ' ');
@@ -187,7 +187,7 @@ export class MainView {
     const game1Picture = createElement('div', 'game-picture btn-audio');
     game1.appendChild(game1Picture);
 
-    const game2 = createElement('a', 'games-btn main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
+    const game2 = createElement('a', 'main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
     game2.href = `#phrase`;
     games.appendChild(game2);
     const game2Title = createElement('div', 'game-title', ' ');
@@ -197,7 +197,7 @@ export class MainView {
 
     const book = document.getElementById('book') as HTMLElement;
 
-    const book0 = createElement('a', 'games-btn main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
+    const book0 = createElement('a', 'main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
     book0.href = `#book`;
     book.appendChild(book0);
     const book0Title = createElement('div', 'game-title', ' ');
@@ -207,7 +207,7 @@ export class MainView {
 
     const stat = document.getElementById('stat') as HTMLElement;
 
-    const stat0 = createElement('a', 'games-btn main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
+    const stat0 = createElement('a', 'main-btn z-depth-2 waves-effect waves-teal') as HTMLAnchorElement;
     stat0.href = `#stats`;
     stat.appendChild(stat0);
     const stat0Title = createElement('div', 'game-title', ' ');

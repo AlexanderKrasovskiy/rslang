@@ -7,6 +7,7 @@ import {
   createBottomImg,
   createScrollSpy,
 } from './helpers/statRenderHelpers';
+import { createElement } from './helpers/renderHelpers';
 import { Stats, SortedStatsArr } from '../types/statsTypes';
 
 export class StatView {
@@ -39,6 +40,18 @@ export class StatView {
 
     this.activateBarChart(labels, barGraphData, labelsToShow);
     this.activateLineChart(labels, lineGraphData, labelsToShow);
+  }
+
+  public showNeedToRegisterModal() {
+    const modal = createElement('div', 'stat_modal');
+    const modalTitle = createElement(
+      'h6',
+      'stat_modal_title',
+      `Статистика доступна только 
+        зарегистрированным пользователям`,
+    );
+    modal.append(modalTitle);
+    this.mainDiv.prepend(modal);
   }
 
   private sortLongStatsToArr(stats: Stats) {

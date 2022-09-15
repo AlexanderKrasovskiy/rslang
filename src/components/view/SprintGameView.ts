@@ -154,8 +154,8 @@ export class SprintGameView {
 
     const levelBlock: HTMLElement = createElement('div', 'level-sprint');
 
-    while (randomPageArr.length < 15) {
-      const randomPage = Math.floor(Math.random() * 29);
+    while (randomPageArr.length < 30) {
+      const randomPage = Math.floor(Math.random() * 30);
       if (!randomPageArr.includes(randomPage)) {
         randomPageArr.push(randomPage);
       }
@@ -173,13 +173,12 @@ export class SprintGameView {
     ];
 
     for (let i = 0; i <= 5; i += 1) {
-      const btnLevel = createElement(
-        'button',
-        `sprint-level-btn z-depth-2 waves-effect ${classArr[i]}`,
-        `${levelArr[i]}`,
+      const btnLevel = <HTMLButtonElement>(
+        createElement('button', `sprint-level-btn z-depth-2 waves-effect ${classArr[i]}`, `${levelArr[i]}`)
       );
-
+      btnLevel.disabled = false;
       btnLevel.onclick = async () => {
+        btnLevel.disabled = true;
         const words = await getRandomWords(randomPageArr, i);
         this.stateGame.innerHTML = '';
         this.stateGame.innerHTML = '';
@@ -223,14 +222,16 @@ export class SprintGameView {
       ' - клавиши влево и вправо для выбора ответа',
     );
 
-    const btnStart = createElement('button', `sprint-start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
+    const btnStart = <HTMLButtonElement>createElement('button', `sprint-start-btn z-depth-1 waves-effect`, 'НАЧАТЬ');
     btnStart.tabIndex = 0;
 
     const data1 = data.filter(
       (item) => !(<Optional>item.optional) || (<Optional>item.optional && <Optional>item.optional).learned === 'no',
     );
 
+    btnStart.disabled = false;
     btnStart.onclick = () => {
+      btnStart.disabled = true;
       this.stateGame.innerHTML = '';
       if (!data1.length) window.location.hash = 'book';
       if (data1.length && user) this.showGame(data1, user);
@@ -334,8 +335,8 @@ export class SprintGameView {
 
     window.addEventListener('keyup', this.handleKeypress);
 
-    btnRight.onclick = () => {
-      this.rightChoice(
+    btnRight.onclick = async () => {
+      await this.rightChoice(
         index,
         mixData,
         data,
@@ -352,8 +353,8 @@ export class SprintGameView {
       index += 1;
     };
 
-    btnWrong.onclick = () => {
-      this.wrongChoice(
+    btnWrong.onclick = async () => {
+      await this.wrongChoice(
         index,
         mixData,
         data,
@@ -387,7 +388,7 @@ export class SprintGameView {
     return this.stateGame;
   }
 
-  rightChoice(
+  async rightChoice(
     index: number,
     mixData: MixWordsSprint[],
     data: WordPlusUserWord[],
@@ -408,7 +409,7 @@ export class SprintGameView {
 
     if (index < mixData.length) {
       const userWord = this.findWord(data, mixData[index].en);
-      if (userWord && user) this.createNewUserWord(userWord, user);
+      if (userWord && user) await this.createNewUserWord(userWord, user);
       if (!mixData[index].match) {
         if (userWord && user) {
           this.bestResult.push(this.countBestRes);
@@ -445,7 +446,7 @@ export class SprintGameView {
     wordName.appendChild(audioBlock);
   }
 
-  wrongChoice(
+  async wrongChoice(
     index: number,
     mixData: MixWordsSprint[],
     data: WordPlusUserWord[],
@@ -466,7 +467,7 @@ export class SprintGameView {
 
     if (index < mixData.length) {
       const userWord = this.findWord(data, mixData[index].en);
-      if (userWord && user) this.createNewUserWord(userWord, user);
+      if (userWord && user) await this.createNewUserWord(userWord, user);
       if (!mixData[index].match) {
         if (userWord && user) {
           this.countBestRes += 1;
@@ -590,11 +591,7 @@ export class SprintGameView {
     const learnedWords = [...new Set(arrStr1)].map((e) => JSON.parse(e));
     const arrStr2 = this.unlearnedWords.map((a) => JSON.stringify(a));
     const unlearnedWords = [...new Set(arrStr2)].map((e) => JSON.parse(e));
-    const headerListLerned = createElement(
-      'div',
-      'sprint_header-learn',
-      `Угаданные слова - ${learnedWords.length}`,
-    );
+    const headerListLerned = createElement('div', 'sprint_header-learn', `Угаданные слова - ${learnedWords.length}`);
     const headerListUnlerned = createElement(
       'div',
       'sprint_header-unlearn',

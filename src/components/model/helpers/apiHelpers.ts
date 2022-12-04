@@ -1,6 +1,7 @@
 import { Assets, Method, Path, UserWord, Word } from '../../types';
 
-export const HOST = 'https://rslang-english-learnwords.herokuapp.com';
+// export const HOST = 'https://rslang-english-learnwords.herokuapp.com';
+export const HOST = 'https://reactrs.onrender.com';
 
 export const getWords = async (page = 0, level = 0): Promise<Word[]> => {
   const url = `${HOST}${Path.words}?page=${page}&group=${level}`;
